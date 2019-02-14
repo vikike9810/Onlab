@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/activity_main"
+        tools:context=".MainActivity">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="2">
+
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/profil"
+                    android:textSize="30dp"
+                    android:layout_margin="1dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_blue_dark"/>
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/jegyek"
+                    android:textSize="30dp"
+                    android:layout_margin="1dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_blue_bright"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="2">
+
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/edz_sterv"
+                    android:textSize="30dp"
+                    android:layout_margin="1dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_blue_bright"/>
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="30dp"
+                    android:text="@string/bel_p_s"
+                    android:layout_margin="1dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_blue_dark"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="2">
+
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="30dp"
+                    android:text="@string/r_lunk"
+                    android:layout_margin="1dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_blue_dark"/>
+            <Button
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/kapcsolat"
+                    android:textSize="30dp"
+                    android:layout_margin="1dp"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_blue_bright"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
