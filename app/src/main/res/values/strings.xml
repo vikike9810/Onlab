@@ -7,4 +7,8 @@
     <string name="edz_sterv">Edzésterv</string>
     <string name="jegyek">Jegyek</string>
     <string name="profil">Profil</string>
+    <string name="bejelentkez_s">Bejelentkezés</string>
+    <string name="e_mail">E-mail</string>
+    <string name="jelsz">Jelszó</string>
+    <string name="m_g_nem_regisztr_ltam">Még nem regisztráltam</string>
 </resources>
