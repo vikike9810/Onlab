@@ -1,4 +1,5 @@
 package com.onlab.gymapp
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.*;
 import kotlinx.android.synthetic.main.login.*
+import kotlinx.android.synthetic.main.login_fragment.*
 
 class Login : AppCompatActivity() {
 
@@ -16,10 +18,12 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
         auth = FirebaseAuth.getInstance();
+        vpLogin.adapter= LoginPagerAdapter(supportFragmentManager)
+
     }
 
     fun SignUp(v: View){
-        Toast.makeText(this,"jauuuu", Toast.LENGTH_LONG).show()
+        vpLogin.setCurrentItem(1,true)
     }
 
     fun SignIn(v: View){
@@ -33,9 +37,9 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     val id = user?.uid
-                    Toast.makeText(this,"Sikeres belépés",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this,"Sikeres belépés", Toast.LENGTH_LONG).show()
                 } else {
-                    Toast.makeText(baseContext, "Authentication failed. " + email + " " + password,
+                    Toast.makeText(this, "Authentication failed. " + email + " " + password,
                         Toast.LENGTH_SHORT).show()
                 }
 
@@ -43,6 +47,5 @@ class Login : AppCompatActivity() {
 
 
     }
-
 
 }

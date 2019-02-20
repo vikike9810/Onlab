@@ -11,4 +11,8 @@
     <string name="e_mail">E-mail</string>
     <string name="jelsz">Jelszó</string>
     <string name="m_g_nem_regisztr_ltam">Még nem regisztráltam</string>
+    <string name="regisztr_lok">Regisztrálok</string>
+    <string name="n_v">Név</string>
+    <string name="regiszt">Regisztráció</string>
+    <string name="jh">kaka</string>
 </resources>
