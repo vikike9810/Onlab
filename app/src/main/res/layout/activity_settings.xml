@@ -33,7 +33,7 @@
                 android:layout_marginLeft="30dp"
                 android:textSize="16sp"
                 android:textColor="#000"
-                android:text="@string/nev"/>
+                android:text="@string/nev_beall"/>
 
         <EditText
                 android:id="@+id/et_name_settings"
