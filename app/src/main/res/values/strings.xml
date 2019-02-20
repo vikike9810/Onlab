@@ -14,5 +14,6 @@
     <string name="regisztr_lok">Regisztrálok</string>
     <string name="n_v">Név</string>
     <string name="regiszt">Regisztráció</string>
-    <string name="jh">kaka</string>
+    <string name="facebook_app_id">349790692535278</string>
+    <string name="fb_login_protocol_scheme">fb349790692535278</string>
 </resources>
