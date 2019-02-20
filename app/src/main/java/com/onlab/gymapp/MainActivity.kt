@@ -33,6 +33,9 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, Login::class.java))
                 return true
             }
+            R.id.action_settings -> {
+                startActivity(Intent(this,SettingsActivity::class.java))
+            }
         }
         return super.onOptionsItemSelected(item)
     }
