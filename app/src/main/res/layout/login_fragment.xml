@@ -37,16 +37,18 @@
             android:layout_margin="10dp"
             android:onClick="SignIn"/>
 
-    <ImageButton android:layout_width="match_parent"
-                 android:layout_height="70dp"
-                 android:layout_margin="10dp"
-                 android:src="@drawable/face"
-                 android:cropToPadding="true"/>
+    <com.facebook.login.widget.LoginButton
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_margin="10dp"
+            android:cropToPadding="true"
+            android:id="@+id/buttonFacebookLogin"/>
 
     <ImageButton android:layout_width="match_parent"
                  android:layout_height="70dp"
                  android:layout_margin="10dp"
-                 android:src="@drawable/google"/>
+                 android:src="@drawable/google"
+                 android:onClick="gooUp"/>
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"

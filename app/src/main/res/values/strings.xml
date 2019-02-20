@@ -15,12 +15,4 @@
     <string name="n_v">Név</string>
     <string name="regiszt">Regisztráció</string>
     <string name="jh">kaka</string>
-    <string name="beallitasok">Beállítások</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="nev">Név:</string>
-    <string name="uj_kep">Új kép feltöltése</string>
-    <string name="eletkor">Életkor:</string>
-    <string name="magassag">Magasság:</string>
-    <string name="tomeg">Tömeg:</string>
-    <string name="szuletesi_datum">Születési dátum:</string>
 </resources>
