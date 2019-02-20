@@ -1,12 +1,10 @@
-package com.onlab.gymapp
-import android.content.Context
-import android.content.Intent
+package com.onlab.gymapp.Login
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.*;
+import com.onlab.gymapp.R
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.login_fragment.*
 
@@ -22,7 +20,9 @@ class Login : AppCompatActivity() {
 
     }
 
-    fun SignUp(v: View){
+    override
+
+    fun ToSignUp(v: View){
         vpLogin.setCurrentItem(1,true)
     }
 
@@ -44,6 +44,11 @@ class Login : AppCompatActivity() {
                 }
 
             }
+
+        fun SingUp(v:View){
+
+
+        }
 
 
     }

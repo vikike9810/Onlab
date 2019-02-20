@@ -1,7 +1,5 @@
-package com.onlab.gymapp
+package com.onlab.gymapp.Login
 
-import android.app.Application
-import android.content.res.Resources
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
