@@ -19,8 +19,7 @@ class Login : AppCompatActivity() {
         vpLogin.adapter= LoginPagerAdapter(supportFragmentManager)
 
     }
-
-    override
+    
 
     fun ToSignUp(v: View){
         vpLogin.setCurrentItem(1,true)
