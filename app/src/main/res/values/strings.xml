@@ -13,6 +13,12 @@
     <string name="m_g_nem_regisztr_ltam">Még nem regisztráltam</string>
     <string name="regisztr_lok">Regisztrálok</string>
     <string name="n_v">Név</string>
+    <string name="nev">Név:</string>
     <string name="regiszt">Regisztráció</string>
     <string name="jh">kaka</string>
+    <string name="uj_kep">ÚJ KÉP FELTÖLTÉSE</string>
+    <string name="eletkor">Életkor:</string>
+    <string name="magassag">Magasság:</string>
+    <string name="tomeg">Tömeg:</string>
+    <string name="szuletesi_datum">Születési dátum:</string>
 </resources>
