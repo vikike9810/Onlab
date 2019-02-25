@@ -8,42 +8,38 @@
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
         <ImageButton
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_margin="30dp"
-                android:src="@drawable/csecsii"/>
-
-        <Button
-                android:layout_width="150dp"
-                android:layout_height="150dp"
                 android:layout_marginTop="30dp"
-                android:text="Még 4 alkalmad maradt"
-                android:background="@android:color/holo_blue_bright"/>
+                android:layout_marginLeft="30dp"
+                android:src="@drawable/csecsii"/>
+        <TextView
+                android:id="@+id/et_name_profil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                tools:text="Sándorka"/>
 
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
                   android:layout_margin="10dp">
-        <TextView
-                android:id="@+id/name_profil"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:textSize="16sp"
-                android:textColor="#000"
-                android:text="@string/nev_beall"/>
 
-        <TextView
-                android:id="@+id/et_name_profil"
+        <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                tools:text="Sándorka"/>
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:text="Még 4 alkalmad maradt"
+                android:background="@android:color/holo_blue_bright"/>
     </LinearLayout>
+
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:layout_margin="10dp">
