@@ -18,7 +18,7 @@ class ProfilActivity : AppCompatActivity() {
         super.onResume()
         et_name_profil.setText(User.Name)
         var year = User.Birth.year + 1900
-        et_birth_profil.setText(DateConverter(year,User.Birth.month,User.Birth.day))
+        et_birth_profil.setText(DateConverter(year,User.Birth.month,User.Birth.date))
         et_height_profil.setText(User!!.Height?.toString())
         et_weight_profil.setText(User!!.Weight?.toString())
     }
