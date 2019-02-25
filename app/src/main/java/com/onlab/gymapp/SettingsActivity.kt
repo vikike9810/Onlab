@@ -19,6 +19,7 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+        et_name_settings.setText(User?.Name)
     }
 
 
@@ -40,6 +41,9 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
 
      /*   et_name_settings.setText(User.Name)
         et_birth_settings.setText(User.Birth.toString())
+        et_height_settings.setText(User!!.Height?.toString())
+        et_weight_settings.setText(User!!.Weight?.toString())
+    }
         et_height_settings.setText(User.Height.toString())
         et_weight_settings.setText(User.Weight.toString())*/
 
