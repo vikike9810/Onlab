@@ -15,7 +15,7 @@
         <ImageButton
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_margin="30dp" tools:src="@drawable/profil"/>
+                android:layout_margin="30dp"/>
 
         <Button
                 android:layout_width="wrap_content"
@@ -108,9 +108,9 @@
                 android:textColor="#000"
                 android:text="@string/szuletesi_datum"/>
 
-        <DatePicker android:id="@+id/et_birth_settings"
+        <EditText android:id="@+id/et_birth_settings"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"/>
+                    android:layout_height="wrap_content"/>
 
     </LinearLayout>
     <LinearLayout android:layout_width="wrap_content"

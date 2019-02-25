@@ -1,4 +1,5 @@
 package com.onlab.gymapp.Login
+
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -15,16 +16,18 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*;
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
+import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.R
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.register_fragment.*
+import java.text.SimpleDateFormat
 
-class Login : AppCompatActivity(),LoginFragment.LoginListener {
+class Login : AppCompatActivity(), LoginFragment.LoginListener {
 
     private lateinit var functions: FirebaseFunctions
     private lateinit var auth: FirebaseAuth
-    lateinit var user : FirebaseUser
+    lateinit var user: FirebaseUser
     var callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,56 +35,89 @@ class Login : AppCompatActivity(),LoginFragment.LoginListener {
         setContentView(R.layout.login)
         auth = FirebaseAuth.getInstance();
         functions = FirebaseFunctions.getInstance()
-        vpLogin.adapter= LoginPagerAdapter(supportFragmentManager)
+        vpLogin.adapter = LoginPagerAdapter(supportFragmentManager)
 
     }
 
 
-
-
-    fun ToSignUp(v: View){
-        vpLogin.setCurrentItem(1,true)
+    fun ToSignUp(v: View) {
+        vpLogin.setCurrentItem(1, true)
     }
 
-    fun SignIn(v: View){
+    fun SignIn(v: View) {
 
-        val email : String = EtEmail.text.toString()
-        val password : String = EtPassword.text.toString()
+        val email: String = EtEmail.text.toString()
+        val password: String = EtPassword.text.toString()
 
 
-        auth.signInWithEmailAndPassword(email,password)
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     user = auth.currentUser!!
                     val id = user?.uid
-                    Toast.makeText(this,"Sikeres belépés", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Sikeres belépés", Toast.LENGTH_LONG).show()
+                    getUserDetails();
                 } else {
-                    Toast.makeText(this, "Authentication failed. " + email + " " + password,
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, "Authentication failed. " + email + " " + password,
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
 
-    fun addName(name:String){
-        var ret="Sikertelen regisztráció"
-    addMessage(name).addOnCompleteListener(OnCompleteListener {
-        task->
-        if(!task.isSuccessful){
-            val e =task.exception
-            if (e is FirebaseFunctionsException) {
-                val code = e.code
-                val details = e.details
+    private fun getUserDetails() {
+        getDetailsFromServer().addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                val e = task.exception
+                if (e is FirebaseFunctionsException) {
+                    val code = e.code
+                    val details = e.details
+                }
+            } else {
+                if (task.result["name"].equals("Error")) {
+                    Toast.makeText(this, "Hiba történt az adatok kérésekor", Toast.LENGTH_LONG).show()
+                } else {
+                    User.Name = task.result["name"]!!
+                    val format = SimpleDateFormat("yyyy.mm.dd")
+                    User.Birth = format.parse(task.result["birth"])
+                    User.Height = Integer.parseInt(task.result["height"]) as Integer
+                    User.Weight = Integer.parseInt(task.result["weight"]) as Integer
+                }
             }
-        }
-        if(task.result.equals("OK")){
-                Toast.makeText(this,"Sikeres regisztráció", Toast.LENGTH_LONG).show()
-            }
-        else
-            Toast.makeText(this,"Sikertelen regisztráció", Toast.LENGTH_LONG).show()
-    })
-}
+        })
+    }
 
-    fun addMessage(name:String): Task<String> {
+    private fun getDetailsFromServer(): Task<HashMap<String, String>> {
+        val data = hashMapOf(
+            "userid" to user.uid
+        )
+        return functions.getHttpsCallable("getDetails")
+            .call(data)
+            .continueWith { task ->
+                val result = task.result?.data as HashMap<String, String>
+                result;
+            }
+    }
+
+    fun addName(name: String) {
+        var ret = "Sikertelen regisztráció"
+        addMessage(name).addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                val e = task.exception
+                if (e is FirebaseFunctionsException) {
+                    val code = e.code
+                    val details = e.details
+                }
+            }
+            if (task.result.equals("OK")) {
+                Toast.makeText(this, "Sikeres regisztráció", Toast.LENGTH_LONG).show()
+            } else
+                Toast.makeText(this, "Sikertelen regisztráció", Toast.LENGTH_LONG).show()
+        })
+    }
+
+    fun addMessage(name: String): Task<String> {
 
         val data = hashMapOf(
             "userid" to user.uid,
@@ -90,18 +126,18 @@ class Login : AppCompatActivity(),LoginFragment.LoginListener {
 
         return functions.getHttpsCallable("register")
             .call(data)
-            .continueWith{task ->
+            .continueWith { task ->
                 val result = task.result?.data as String
-            result
+                result
             }
 
 
     }
 
-    fun SignUp(v:View){
+    fun SignUp(v: View) {
 
-        var regemail=RegEmail.text.toString()
-        var regpass=RegPassword.text.toString()
+        var regemail = RegEmail.text.toString()
+        var regpass = RegPassword.text.toString()
         auth.createUserWithEmailAndPassword(regemail, regpass)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -111,37 +147,37 @@ class Login : AppCompatActivity(),LoginFragment.LoginListener {
 
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(this,task.exception!!.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, task.exception!!.message, Toast.LENGTH_LONG).show()
 
                 }
 
             }
 
     }
-    fun gooUp(v: View){
-    //    FacebookLoginSetup()
+
+    fun gooUp(v: View) {
+        //    FacebookLoginSetup()
     }
 
 
-     override fun FacebookLoginSetup() {
-          // Initialize Facebook Login button
+    override fun FacebookLoginSetup() {
+        // Initialize Facebook Login button
 
-          buttonFacebookLogin.setReadPermissions("email", "public_profile")
-          buttonFacebookLogin.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-              override fun onSuccess(loginResult: LoginResult) {
-                  handleFacebookAccessToken(loginResult.accessToken)
-              }
+        buttonFacebookLogin.setReadPermissions("email", "public_profile")
+        buttonFacebookLogin.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(loginResult: LoginResult) {
+                handleFacebookAccessToken(loginResult.accessToken)
+            }
 
-              override fun onCancel() {
-                  Toast.makeText(this@Login, "cancel", Toast.LENGTH_LONG).show()
-              }
+            override fun onCancel() {
+                Toast.makeText(this@Login, "cancel", Toast.LENGTH_LONG).show()
+            }
 
-              override fun onError(error: FacebookException) {
-                  Toast.makeText(this@Login, error.message, Toast.LENGTH_LONG).show()
-              }
-          })
-      }
-
+            override fun onError(error: FacebookException) {
+                Toast.makeText(this@Login, error.message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
 
 
     private fun handleFacebookAccessToken(token: AccessToken) {
@@ -152,24 +188,26 @@ class Login : AppCompatActivity(),LoginFragment.LoginListener {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     user = auth.currentUser!!
-                    addName(user!!.displayName?:"nincs név")
+                    addName(user!!.displayName ?: "nincs név")
 
                 } else {
                     // If sign in fails, display a message to the user.
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             }
     }
 
 
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-            super.onActivityResult(requestCode, resultCode, data)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-            // Pass the activity result back to the Facebook SDK
-            callbackManager.onActivityResult(requestCode, resultCode, data)
-        }
+        // Pass the activity result back to the Facebook SDK
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
 
 
 }
