@@ -21,7 +21,8 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
         et_name_settings.setText(User.Name)
-        et_birth_settings.setText((User.Birth.year + 1970).toString()  + "." + (User.Birth.month + 1).toString() + "." + User.Birth.day.toString())
+        var year = User.Birth.year + 1970
+        et_birth_settings.setText(DateConverter(year,User.Birth.month,User.Birth.day))
         et_height_settings.setText(User!!.Height?.toString())
         et_weight_settings.setText(User!!.Weight?.toString())
     }

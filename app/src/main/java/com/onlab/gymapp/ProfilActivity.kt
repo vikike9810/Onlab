@@ -13,7 +13,8 @@ class ProfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
         et_name_profil.setText(User.Name)
-        et_birth_profil.setText(User.Birth.toString())
+        var year = User.Birth.year + 1970
+        et_birth_profil.setText(DateConverter(year,User.Birth.month,User.Birth.day))
         et_height_profil.setText(User!!.Height?.toString())
         et_weight_profil.setText(User!!.Weight?.toString())
     }
@@ -21,5 +22,18 @@ class ProfilActivity : AppCompatActivity() {
      fun toSettings(v: View){
         startActivity(Intent(this,SettingsActivity::class.java))
     }
+
+    fun DateConverter(year: Int, month: Int, day: Int):String{
+        var sday=day.toString()
+        var smonth=(month+1).toString()
+        if(day<10){
+            sday="0"+day.toString()
+        }
+        if(month<10){
+            smonth="0"+(month+1).toString()
+        }
+        return year.toString()+"."+smonth+"."+sday
+    }
+
 
 }
