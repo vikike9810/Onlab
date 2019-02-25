@@ -29,7 +29,7 @@
                   android:orientation="horizontal"
                   android:layout_margin="10dp">
         <TextView
-                android:id="@+id/name_settings"
+                android:id="@+id/name_profil"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -38,7 +38,7 @@
                 android:text="@string/nev_beall"/>
 
         <TextView
-                android:id="@+id/et_name_settings"
+                android:id="@+id/et_name_profil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -48,7 +48,7 @@
                   android:layout_height="wrap_content"
                   android:layout_margin="10dp">
         <TextView
-                android:id="@+id/age_settings"
+                android:id="@+id/age_profil"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -57,7 +57,7 @@
                 android:text="@string/eletkor"/>
 
         <TextView
-                android:id="@+id/et_age_settings"
+                android:id="@+id/et_age_profil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
@@ -66,7 +66,7 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:layout_margin="10dp">
         <TextView
-                android:id="@+id/height_settings"
+                android:id="@+id/height_profil"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -75,7 +75,7 @@
                 android:text="@string/magassag"/>
 
         <TextView
-                android:id="@+id/et_height_settings"
+                android:id="@+id/et_height_profil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -85,7 +85,7 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:layout_margin="10dp">
         <TextView
-                android:id="@+id/weight_settings"
+                android:id="@+id/weight_profil"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -94,7 +94,7 @@
                 android:text="@string/tomeg"/>
 
         <TextView
-                android:id="@+id/et_weight_settings"
+                android:id="@+id/et_weight_profil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -104,7 +104,7 @@
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:layout_margin="10dp">
         <TextView
-                android:id="@+id/birth_settings"
+                android:id="@+id/birth_profil"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -113,7 +113,7 @@
                 android:text="@string/szuletesi_datum"/>
 
         <TextView
-                android:id="@+id/et_birth_settings"
+                android:id="@+id/et_birth_profil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"

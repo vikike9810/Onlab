@@ -19,7 +19,10 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        et_name_settings.setText(User?.Name)
+        et_name_settings.setText(User.Name)
+        et_birth_settings.setText(User.Birth.toString())
+        et_height_settings.setText(User!!.Height?.toString())
+        et_weight_settings.setText(User!!.Weight?.toString())
     }
 
 
@@ -39,13 +42,9 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
         return year.toString()+"."+smonth+"."+sday
     }
 
-     /*   et_name_settings.setText(User.Name)
-        et_birth_settings.setText(User.Birth.toString())
-        et_height_settings.setText(User!!.Height?.toString())
-        et_weight_settings.setText(User!!.Weight?.toString())
-    }
-        et_height_settings.setText(User.Height.toString())
-        et_weight_settings.setText(User.Weight.toString())*/
+
+
+
 
 
     fun DateClick(v: View){
