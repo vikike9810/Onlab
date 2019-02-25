@@ -27,16 +27,17 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/profil"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     android:layout_margin="1dp"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_blue_dark"/>
+                    android:background="@android:color/holo_blue_dark"
+                    android:onClick="Profil"/>
             <Button
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/jegyek"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     android:layout_margin="1dp"
                     android:textColor="@android:color/white"
                     android:background="@android:color/holo_blue_bright"/>

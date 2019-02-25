@@ -25,4 +25,7 @@
     <string name="fb_login_protocol_scheme">fb349790692535278</string>
     <string name="beallitasok">Beállítások</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="profil_szerkeszt_se">Profil szerkesztése</string>
+    <string name="m_gsem">Mégsem</string>
+    <string name="ment_s">Mentés</string>
 </resources>

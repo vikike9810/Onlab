@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.onlab.gymapp.Login.Login
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,5 +39,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun Profil(v:View){
+        startActivity(Intent(this,ProfilActivity::class.java))
     }
 }
