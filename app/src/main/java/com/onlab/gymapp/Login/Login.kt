@@ -78,7 +78,7 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
                     val details = e.details
                 }
             }
-            if (task.result.equals("OK")) {
+            if (task.result.equals("OK" ) || task.result.equals("Login")) {
                 Toast.makeText(this, "Sikeres regisztráció", Toast.LENGTH_LONG).show()
             } else
                 Toast.makeText(this, "Sikertelen regisztráció", Toast.LENGTH_LONG).show()
