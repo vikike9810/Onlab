@@ -6,11 +6,12 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.view.View
 import android.widget.DatePicker
+import android.widget.Toast
 import com.onlab.gymapp.Profile.User
 
 import kotlinx.android.synthetic.main.activity_settings.*
 import com.onlab.gymapp.Login.DatePickerDialogFragment
-
+import java.text.SimpleDateFormat
 
 
 class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSelectedListener {
@@ -43,9 +44,19 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
     }
 
 
+    fun Save(v:View){
+        User.Name=et_name_settings.toString()
+        User.Height=Integer.parseInt(et_height_settings.toString()) as Integer
+        User.Weight=Integer.parseInt(et_weight_settings.toString()) as Integer
+        val format=SimpleDateFormat("yyyy.MM.dd")
+        User.Birth=format.parse(et_birth_settings.toString())
+        Toast.makeText(this,"Adatok elmentve",Toast.LENGTH_LONG).show()
+        finish()
+    }
 
-
-
+    fun Cancel(v:View){
+        finish()
+    }
 
     fun DateClick(v: View){
         DatePickerDialogFragment().show(supportFragmentManager, "DATE_TAG")

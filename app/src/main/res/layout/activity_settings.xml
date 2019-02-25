@@ -122,12 +122,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/m_gsem"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:onClick="Cancel"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/ment_s"
-                android:layout_margin="10dp"/>
+                android:layout_margin="10dp"
+                android:onClick="Save"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -21,4 +21,5 @@ class ProfilActivity : AppCompatActivity() {
      fun toSettings(v: View){
         startActivity(Intent(this,SettingsActivity::class.java))
     }
+
 }
