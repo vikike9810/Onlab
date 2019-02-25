@@ -108,9 +108,10 @@
                 android:textColor="#000"
                 android:text="@string/szuletesi_datum"/>
 
-        <EditText android:id="@+id/et_birth_settings"
+        <TextView  android:id="@+id/et_birth_settings"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:onClick="DateClick"/>
 
     </LinearLayout>
     <LinearLayout android:layout_width="wrap_content"
