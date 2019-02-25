@@ -20,8 +20,13 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
         et_name_settings.setText(User.Name)
-        var year = User.Birth.year + 1970
+        var year = User.Birth.year + 1900
         et_birth_settings.setText(DateConverter(year,User.Birth.month,User.Birth.day))
         et_height_settings.setText(User!!.Height?.toString())
         et_weight_settings.setText(User!!.Weight?.toString())
@@ -41,16 +46,16 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
         if(month<10){
             smonth="0"+(month+1).toString()
         }
-        return year.toString()+"."+smonth+"."+sday
+        return (year).toString()+"."+smonth+"."+sday
     }
 
 
     fun Save(v:View){
-        User.Name=et_name_settings.toString()
-        User.Height=Integer.parseInt(et_height_settings.toString()) as Integer
-        User.Weight=Integer.parseInt(et_weight_settings.toString()) as Integer
+        User.Name=et_name_settings.text.toString()
+        User.Height=Integer.parseInt(et_height_settings.text.toString()) as Integer
+        User.Weight=Integer.parseInt(et_weight_settings.text.toString()) as Integer
         val format=SimpleDateFormat("yyyy.MM.dd")
-        User.Birth=format.parse(et_birth_settings.toString())
+        User.Birth=format.parse(et_birth_settings.text.toString())
         Toast.makeText(this,"Adatok elmentve",Toast.LENGTH_LONG).show()
         finish()
     }
