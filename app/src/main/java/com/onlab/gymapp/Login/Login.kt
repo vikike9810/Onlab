@@ -56,49 +56,17 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
                     user = auth.currentUser!!
                     val id = user?.uid
                     Toast.makeText(this, "Sikeres belépés", Toast.LENGTH_LONG).show()
-                    getUserDetails();
+                    User.LoggedIn = false
+                    finish()
                 } else {
                     Toast.makeText(
-                        this, "Authentication failed. " + email + " " + password,
+                        this, "Authentication failed",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
     }
 
-    private fun getUserDetails() {
-        getDetailsFromServer().addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                val e = task.exception
-                if (e is FirebaseFunctionsException) {
-                    val code = e.code
-                    val details = e.details
-                }
-            } else {
-                if (task.result["name"].equals("Error")) {
-                    Toast.makeText(this, "Hiba történt az adatok kérésekor", Toast.LENGTH_LONG).show()
-                } else {
-                    User.Name = task.result["name"]!!
-                    val format = SimpleDateFormat("yyyy.mm.dd")
-                    User.Birth = format.parse(task.result["birth"])
-                    User.Height = Integer.parseInt(task.result["height"]) as Integer
-                    User.Weight = Integer.parseInt(task.result["weight"]) as Integer
-                }
-            }
-        })
-    }
-
-    private fun getDetailsFromServer(): Task<HashMap<String, String>> {
-        val data = hashMapOf(
-            "userid" to user.uid
-        )
-        return functions.getHttpsCallable("getDetails")
-            .call(data)
-            .continueWith { task ->
-                val result = task.result?.data as HashMap<String, String>
-                result;
-            }
-    }
 
     fun addName(name: String) {
         var ret = "Sikertelen regisztráció"
