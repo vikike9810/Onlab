@@ -1,13 +1,19 @@
 package com.onlab.gymapp
 
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.onlab.gymapp.Profile.User
+import com.onlab.gymapp.Profile.profilePictureTask
 import kotlinx.android.synthetic.main.activity_profil.*
+import java.net.URL
 
-class ProfilActivity : AppCompatActivity() {
+class ProfilActivity : AppCompatActivity(), profilePictureTask.ProfilePictureCallbackInterface {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,25 +24,33 @@ class ProfilActivity : AppCompatActivity() {
         super.onResume()
         et_name_profil.setText(User.Name)
         var year = User.Birth.year + 1900
-        et_birth_profil.setText(DateConverter(year,User.Birth.month,User.Birth.date))
+        et_birth_profil.setText(DateConverter(year, User.Birth.month, User.Birth.date))
         et_height_profil.setText(User!!.Height?.toString())
         et_weight_profil.setText(User!!.Weight?.toString())
+        if (User.imgUrl.length > 0) {
+
+            profilePictureTask(this).execute()
+        }
     }
 
-     fun toSettings(v: View){
-        startActivity(Intent(this,SettingsActivity::class.java))
+    fun toSettings(v: View) {
+        startActivity(Intent(this, SettingsActivity::class.java))
     }
 
-    fun DateConverter(year: Int, month: Int, day: Int):String{
-        var sday=day.toString()
-        var smonth=(month+1).toString()
-        if(day<10){
-            sday="0"+day.toString()
+    fun DateConverter(year: Int, month: Int, day: Int): String {
+        var sday = day.toString()
+        var smonth = (month + 1).toString()
+        if (day < 10) {
+            sday = "0" + day.toString()
         }
-        if(month<10){
-            smonth="0"+(month+1).toString()
+        if (month < 10) {
+            smonth = "0" + (month + 1).toString()
         }
-        return (year).toString()+"."+smonth+"."+sday
+        return (year).toString() + "." + smonth + "." + sday
+    }
+
+    override fun setPicture(bitmap: Bitmap) {
+        picture_profil.setImageBitmap(bitmap)
     }
 
 

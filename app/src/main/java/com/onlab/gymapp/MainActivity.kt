@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         if (user != null && !User.LoggedIn) {
             User.LoggedIn = true
             getUserDetails()
+            User.imgUrl = user?.photoUrl.toString() + "?type=large"
         }
 
     }
