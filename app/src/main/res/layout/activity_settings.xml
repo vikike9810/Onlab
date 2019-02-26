@@ -13,9 +13,12 @@
             android:layout_height="wrap_content">
 
         <ImageButton
+                android:id="@+id/picture_settings"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_margin="30dp"/>
+                android:layout_margin="30dp"
+                android:scaleType="fitXY"
+                android:padding="0dp"/>
 
         <Button
                 android:layout_width="wrap_content"
@@ -60,6 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
+                android:inputType="number"
                 tools:text="42343"/>
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
@@ -78,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:textSize="16sp"
+                android:inputType="number"
                 tools:text="187 cm"/>
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
@@ -96,6 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:textSize="16sp"
+                android:inputType="number"
                 tools:text="562 kg"/>
     </LinearLayout>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
@@ -108,10 +114,10 @@
                 android:textColor="#000"
                 android:text="@string/szuletesi_datum"/>
 
-        <TextView  android:id="@+id/et_birth_settings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="DateClick"/>
+        <TextView android:id="@+id/et_birth_settings"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:onClick="DateClick"/>
 
     </LinearLayout>
     <LinearLayout android:layout_width="wrap_content"

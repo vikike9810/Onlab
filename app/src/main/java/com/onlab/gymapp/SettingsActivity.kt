@@ -1,6 +1,7 @@
 package com.onlab.gymapp
 
 import android.app.DatePickerDialog
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +18,12 @@ import com.onlab.gymapp.Profile.User
 
 import kotlinx.android.synthetic.main.activity_settings.*
 import com.onlab.gymapp.Login.DatePickerDialogFragment
+import com.onlab.gymapp.Profile.profilePictureTask
 import java.text.SimpleDateFormat
 
 
-class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSelectedListener {
+class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSelectedListener,profilePictureTask.ProfilePictureCallbackInterface {
+
 
     private lateinit var functions: FirebaseFunctions
     private lateinit var auth: FirebaseAuth
@@ -42,6 +45,9 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
         et_birth_settings.setText(DateConverter(year, User.Birth.month, User.Birth.date))
         et_height_settings.setText(User!!.Height?.toString())
         et_weight_settings.setText(User!!.Weight?.toString())
+        if (User.imgUrl != null){
+                profilePictureTask(this).execute()
+        }
     }
 
 
@@ -116,6 +122,10 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
 
     fun DateClick(v: View) {
         DatePickerDialogFragment().show(supportFragmentManager, "DATE_TAG")
+    }
+
+    override fun setPicture(bitmap: Bitmap) {
+        picture_settings.setImageBitmap(bitmap)
     }
 
 }
