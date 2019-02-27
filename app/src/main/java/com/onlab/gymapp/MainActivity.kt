@@ -1,6 +1,8 @@
 package com.onlab.gymapp
 
 import android.content.Intent
+import android.content.res.Resources
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu
@@ -13,8 +15,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
+import com.google.firebase.storage.FirebaseStorage
 import com.onlab.gymapp.Login.Login
 import com.onlab.gymapp.Profile.User
+import com.onlab.gymapp.Profile.profilePictureTask
 
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
@@ -24,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     var user: FirebaseUser? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var functions: FirebaseFunctions
+    var storage = FirebaseStorage.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         functions = FirebaseFunctions.getInstance()
         user = auth.currentUser
         if (user != null && !User.LoggedIn) {
+            User.image = BitmapFactory.decodeResource(this.resources, R.drawable.no_profile_picture)
             User.LoggedIn = true
             getUserDetails()
-            User.imgUrl = user?.photoUrl.toString() + "?type=large"
         }
 
     }
@@ -71,6 +76,19 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+        var storageRef = storage.reference
+        var imageRef = storageRef.child("images/" + user?.uid + ".jpg")
+        imageRef.getBytes(1024 * 1024).addOnSuccessListener {
+            User.image = BitmapFactory.decodeByteArray(it, 0, it.size)
+        }.addOnFailureListener {
+            User.imgUrl = user?.photoUrl.toString()
+            if (!User.imgUrl.equals("null")) {
+                User.imgUrl += "?type=large"
+                profilePictureTask().execute()
+            }
+        }
+
+
     }
 
     private fun getDetailsFromServer(): Task<HashMap<String, String>> {

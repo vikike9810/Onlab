@@ -156,6 +156,7 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     user = auth.currentUser!!
+                    User.LoggedIn = false
                     addName(user!!.displayName ?: "nincs név")
 
                 } else {
