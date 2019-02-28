@@ -10,6 +10,7 @@ import java.util.*
 
 object User {
 
+
     var Name: String
     var Height: Integer
     var Weight: Integer
@@ -25,5 +26,17 @@ object User {
         Birth = Date(0)
         LoggedIn = false
     }
+
+    fun resetUser(resources: Resources?) {
+        Name = ""
+        Height = Integer(0)
+        Weight = Integer(0)
+        Birth = Date(0)
+        LoggedIn = false
+        image = BitmapFactory.decodeResource(resources, R.drawable.no_profile_picture)
+        imgUrl = "null"
+
+    }
+
 
 }

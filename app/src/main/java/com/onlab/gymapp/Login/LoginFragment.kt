@@ -3,6 +3,7 @@ package com.onlab.gymapp.Login
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.onlab.gymapp.R
 import kotlinx.android.synthetic.main.login_fragment.*
+import java.io.Serializable
 
 class LoginFragment : Fragment() {
 
@@ -35,7 +37,7 @@ class LoginFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        act.FacebookLoginSetup()
+        act.onLoggedIn()
     }
 
     override fun onAttach(context: Context?) {
@@ -44,8 +46,8 @@ class LoginFragment : Fragment() {
 
     }
 
-    public interface LoginListener {
-        fun FacebookLoginSetup()
+     interface LoginListener  {
+        fun onLoggedIn()
     }
 
 

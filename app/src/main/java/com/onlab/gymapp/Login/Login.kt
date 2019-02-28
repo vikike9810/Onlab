@@ -3,8 +3,8 @@ package com.onlab.gymapp.Login
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
@@ -16,12 +16,12 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*;
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
+import com.onlab.gymapp.MainActivity
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.R
 import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.register_fragment.*
-import java.text.SimpleDateFormat
 
 class Login : AppCompatActivity(), LoginFragment.LoginListener {
 
@@ -36,7 +36,6 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
         auth = FirebaseAuth.getInstance();
         functions = FirebaseFunctions.getInstance()
         vpLogin.adapter = LoginPagerAdapter(supportFragmentManager)
-
     }
 
 
@@ -54,6 +53,7 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     user = auth.currentUser!!
+                    MainActivity.user = user
                     val id = user?.uid
                     Toast.makeText(this, "Sikeres belépés", Toast.LENGTH_LONG).show()
                     User.LoggedIn = false
@@ -127,13 +127,16 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
         //    FacebookLoginSetup()
     }
 
+    override fun onLoggedIn() {
+       FacebookLoginSetup()
+    }
 
-    override fun FacebookLoginSetup() {
-        // Initialize Facebook Login button
+     fun FacebookLoginSetup() {
 
         buttonFacebookLogin.setReadPermissions("email", "public_profile")
         buttonFacebookLogin.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
+                buttonFacebookLogin.visibility = Button.INVISIBLE
                 handleFacebookAccessToken(loginResult.accessToken)
             }
 
@@ -154,13 +157,13 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     user = auth.currentUser!!
+                    MainActivity.user = user
                     User.LoggedIn = false
                     addName(user!!.displayName ?: "nincs név")
+                    finish()
 
                 } else {
-                    // If sign in fails, display a message to the user.
                     Toast.makeText(
                         baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT
@@ -174,7 +177,6 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Pass the activity result back to the Facebook SDK
         callbackManager.onActivityResult(requestCode, resultCode, data)
     }
 

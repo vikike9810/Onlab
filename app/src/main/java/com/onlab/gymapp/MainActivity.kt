@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.facebook.login.LoginManager
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +18,7 @@ import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
 import com.google.firebase.storage.FirebaseStorage
 import com.onlab.gymapp.Login.Login
+import com.onlab.gymapp.Login.LoginFragment
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.Profile.profilePictureTask
 
@@ -25,10 +27,13 @@ import java.text.SimpleDateFormat
 
 class MainActivity : AppCompatActivity() {
 
-    var user: FirebaseUser? = null
+    companion object {
+        var user: FirebaseUser? = null
+    }
     private lateinit var auth: FirebaseAuth
     private lateinit var functions: FirebaseFunctions
     var storage = FirebaseStorage.getInstance()
+    var item: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         functions = FirebaseFunctions.getInstance()
         user = auth.currentUser
         if (user != null && !User.LoggedIn) {
-            User.image = BitmapFactory.decodeResource(this.resources, R.drawable.no_profile_picture)
+            resetUser()
             User.LoggedIn = true
             getUserDetails()
         }
@@ -49,8 +54,11 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         if (!User.LoggedIn) {
-            getUserDetails()
+            if (user != null) {
+                getUserDetails()
+            }
         }
+        updateMenuItem()
     }
 
     private fun getUserDetails() {
@@ -103,9 +111,12 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
+        this.item = menu.findItem(R.id.action_login)
+        updateMenuItem()
         return true
     }
 
@@ -115,17 +126,43 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         when (item.itemId) {
             R.id.action_login -> {
-                startActivity(Intent(this, Login::class.java))
-                return true
+                if (user != null) {
+                    logout()
+
+                } else {
+                    startActivity(Intent(this, Login::class.java))
+                    return true
+                }
             }
             R.id.action_settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
+                return true
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun logout() {
+        resetUser()
+        LoginManager.getInstance().logOut()
+        auth.signOut()
+        user = null
+        updateMenuItem()
+    }
+
+    private fun resetUser() {
+        User.resetUser(this.resources)
+    }
+
     fun Profil(v: View) {
         startActivity(Intent(this, ProfilActivity::class.java))
+    }
+
+    fun updateMenuItem() {
+        if (user != null) {
+            item?.title = getString(R.string.logout)
+        } else {
+            item?.title = getString(R.string.bejelentkez_s)
+        }
     }
 }

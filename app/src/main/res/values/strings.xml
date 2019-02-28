@@ -28,4 +28,5 @@
     <string name="profil_szerkeszt_se">Profil szerkesztése</string>
     <string name="m_gsem">Mégsem</string>
     <string name="ment_s">Mentés</string>
+    <string name="logout">Kijelentkezés</string>
 </resources>
