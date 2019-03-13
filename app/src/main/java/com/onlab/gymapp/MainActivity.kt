@@ -42,8 +42,8 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         functions = FirebaseFunctions.getInstance()
         user = auth.currentUser
+        resetUser()
         if (user != null && !User.LoggedIn) {
-            resetUser()
             User.LoggedIn = true
             getUserDetails()
         }
