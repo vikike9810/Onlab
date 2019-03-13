@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.google.android.gms.flags.Flag
 import com.onlab.gymapp.R
+import com.onlab.gymapp.Ticket.Ticket
 import java.sql.Timestamp
 import java.util.*
 

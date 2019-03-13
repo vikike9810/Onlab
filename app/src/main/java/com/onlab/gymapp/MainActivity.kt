@@ -1,7 +1,6 @@
 package com.onlab.gymapp
 
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
@@ -18,9 +17,9 @@ import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
 import com.google.firebase.storage.FirebaseStorage
 import com.onlab.gymapp.Login.Login
-import com.onlab.gymapp.Login.LoginFragment
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.Profile.profilePictureTask
+import com.onlab.gymapp.Ticket.TicketsActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
@@ -164,5 +163,9 @@ class MainActivity : AppCompatActivity() {
         } else {
             item?.title = getString(R.string.bejelentkez_s)
         }
+    }
+
+    fun Go_Tickets(v:View){
+        startActivity(Intent(this, TicketsActivity::class.java))
     }
 }

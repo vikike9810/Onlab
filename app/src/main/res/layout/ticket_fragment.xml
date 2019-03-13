@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+            android:text="A megvásárolt jegy adatai:"
+              android:layout_margin="20dp"
+              android:gravity="center"
+    />
+
+   <TableLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1">
+
+    <TableRow android:padding="10dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JegyTípus"/>
+        <TextView
+                android:id="@+id/fr_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_marginRight="100dp"
+                android:text="Nincs"/>
+    </TableRow>
+       <TableRow
+               android:padding="10dp">
+           <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Lejárati Dátum"/>
+           <TextView
+                   android:id="@+id/fr_date"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:gravity="right"
+                   android:layout_marginRight="100dp"
+                   android:text="2010.12.02"/>
+       </TableRow>
+       <TableRow  android:padding="10dp">
+           <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Felhasználható alkalmak"/>
+           <TextView
+                   android:id="@+id/fr_num"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:gravity="right"
+                   android:layout_marginRight="100dp"
+                   android:text="9"/>
+       </TableRow>
+   </TableLayout>
+
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beválátás"
+            android:layout_gravity="center"/>
+
+</LinearLayout>

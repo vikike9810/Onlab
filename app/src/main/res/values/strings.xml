@@ -29,4 +29,5 @@
     <string name="m_gsem">Mégsem</string>
     <string name="ment_s">Mentés</string>
     <string name="logout">Kijelentkezés</string>
+    <string name="title_activity_tikets">Tikets</string>
 </resources>
