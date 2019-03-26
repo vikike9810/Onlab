@@ -13,7 +13,7 @@ import com.onlab.gymapp.Profile.profilePictureTask
 import kotlinx.android.synthetic.main.activity_profil.*
 import java.net.URL
 
-class ProfilActivity : AppCompatActivity(), profilePictureTask.ProfilePictureCallbackInterface {
+class ProfilActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +27,7 @@ class ProfilActivity : AppCompatActivity(), profilePictureTask.ProfilePictureCal
         et_birth_profil.setText(DateConverter(year, User.Birth.month, User.Birth.date))
         et_height_profil.setText(User!!.Height?.toString())
         et_weight_profil.setText(User!!.Weight?.toString())
-        if (User.imgUrl.length > 0) {
-
-            profilePictureTask(this).execute()
-        }
+        refreshPicture()
     }
 
     fun toSettings(v: View) {
@@ -49,8 +46,11 @@ class ProfilActivity : AppCompatActivity(), profilePictureTask.ProfilePictureCal
         return (year).toString() + "." + smonth + "." + sday
     }
 
-    override fun setPicture(bitmap: Bitmap) {
-        picture_profil.setImageBitmap(bitmap)
+    fun refreshPicture() {
+        synchronized(User) {
+            if (User.image != null)
+                picture_profil.setImageBitmap(User.image)
+        }
     }
 
 
