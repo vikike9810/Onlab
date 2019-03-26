@@ -101,7 +101,8 @@
                     android:textSize="30dp"
                     android:layout_margin="1dp"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_blue_bright"/>
+                    android:background="@android:color/holo_blue_bright"
+                    android:onClick="Contact"/>
 
 
 
