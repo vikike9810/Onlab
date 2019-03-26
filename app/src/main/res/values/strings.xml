@@ -30,4 +30,5 @@
     <string name="ment_s">Mentés</string>
     <string name="logout">Kijelentkezés</string>
     <string name="title_activity_tikets">Tikets</string>
+    <string name="title_activity_contacts">Kapcsolat</string>
 </resources>

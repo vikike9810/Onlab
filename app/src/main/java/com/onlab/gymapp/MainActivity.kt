@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
 import com.google.firebase.storage.FirebaseStorage
-import com.onlab.gymapp.Contact.ContactActivity
+import com.onlab.gymapp.Contact.ContactsActivity
 import com.onlab.gymapp.Login.Login
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.Profile.profilePictureTask
@@ -171,6 +171,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun Contact (v:View){
-        startActivity(Intent(this, ContactActivity::class.java))
+        startActivity(Intent(this, ContactsActivity::class.java))
     }
 }
