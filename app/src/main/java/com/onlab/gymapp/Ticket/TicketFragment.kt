@@ -18,8 +18,14 @@ class TicketFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         fr_type.setText(Ticket.type.toString())
-        fr_date.setText(Ticket.Date.year.toString()+"."+Ticket.Date.month.toString()+"."+Ticket.Date.date.toString())
-        fr_num.setText(Ticket.DaysLeft.toString())
+        if (Ticket.type == Type.HAVI) {
+            fr_date.setText(DateConverter.convert(Ticket.Date.year, Ticket.Date.month,Ticket.Date.date))
+            fr_num.visibility = View.INVISIBLE
+        }
+        else {
+            fr_num.setText(Ticket.DaysLeft.toString())
+            fr_date.visibility = View.INVISIBLE
+        }
     }
 
 

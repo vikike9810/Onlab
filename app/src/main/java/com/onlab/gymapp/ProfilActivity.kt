@@ -23,8 +23,7 @@ class ProfilActivity : AppCompatActivity(){
     override fun onResume() {
         super.onResume()
         et_name_profil.setText(User.Name)
-        var year = User.Birth.year + 1900
-        et_birth_profil.setText(DateConverter(year, User.Birth.month, User.Birth.date))
+        et_birth_profil.setText(com.onlab.gymapp.Ticket.DateConverter.convert(User.Birth.year, User.Birth.month, User.Birth.date))
         et_height_profil.setText(User!!.Height?.toString())
         et_weight_profil.setText(User!!.Weight?.toString())
         refreshPicture()
@@ -34,17 +33,6 @@ class ProfilActivity : AppCompatActivity(){
         startActivity(Intent(this, SettingsActivity::class.java))
     }
 
-    fun DateConverter(year: Int, month: Int, day: Int): String {
-        var sday = day.toString()
-        var smonth = (month + 1).toString()
-        if (day < 10) {
-            sday = "0" + day.toString()
-        }
-        if (month < 10) {
-            smonth = "0" + (month + 1).toString()
-        }
-        return (year).toString() + "." + smonth + "." + sday
-    }
 
     fun refreshPicture() {
         synchronized(User) {

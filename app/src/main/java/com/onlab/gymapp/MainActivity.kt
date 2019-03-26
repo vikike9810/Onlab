@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             .call(data)
             .continueWith { task ->
                 val result = task.result?.data as HashMap<String, String>
-                result;
+                result
             }
     }
 
