@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
 import com.onlab.gymapp.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class TicketsActivity : AppCompatActivity() {
@@ -24,8 +26,27 @@ class TicketsActivity : AppCompatActivity() {
         functions = FirebaseFunctions.getInstance()
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser!!
-        showFragment()
+        getTicket().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                when (task.result["type"]) {
+                    "1" -> {Ticket.type = Type.EGY_ALKALMAS;Ticket.DaysLeft = task.result["usages"]!!.toInt() }
+                    "5" -> {Ticket.type = Type.OT_ALKALMAS;Ticket.DaysLeft = task.result["usages"]!!.toInt() }
+                    "10" -> {Ticket.type = Type.TIZ_ALKALMAS;Ticket.DaysLeft = task.result["usages"]!!.toInt() }
+                    "31" -> {
+                        Ticket.type = Type.HAVI
+                        var date = task.result["expiration"].toString().toLong()
+                        Ticket.Date = Date( date*1000)
+                    }
+                    "noticket" -> Ticket.type = Type.NINCS
+                }
+
+                showFragment()
+            } else {
+                Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
+            }
+        }
     }
+
 
     private fun showFragment() {
 
@@ -47,15 +68,14 @@ class TicketsActivity : AppCompatActivity() {
             if (task.isSuccessful) {
                 var ticket = task.result
                 val jwt = JWT(ticket)
-                if (tag.equals("31")){
+                if (tag.equals("31")) {
                     var date = jwt.getClaim("exp").asDate()
                     Ticket.Date = date!!
                     Ticket.type = Type.HAVI
-                }
-                else {
+                } else {
                     var daysleft = jwt.getClaim("usages").asInt()
                     Ticket.DaysLeft = daysleft!!
-                    when (daysleft){
+                    when (daysleft) {
                         1 -> Ticket.type = Type.EGY_ALKALMAS
                         5 -> Ticket.type = Type.OT_ALKALMAS
                         10 -> Ticket.type = Type.TIZ_ALKALMAS
@@ -79,6 +99,19 @@ class TicketsActivity : AppCompatActivity() {
                 val result = task.result.data as String
                 result
             }
+    }
+
+    private fun getTicket(): Task<HashMap<String, String>> {
+        val data = hashMapOf(
+            "userid" to user.uid
+        )
+        return functions.getHttpsCallable("getTicket")
+            .call(data)
+            .continueWith { task ->
+                val result = task.result.data as HashMap<String, String>
+                result
+            }
+
     }
 
 }
