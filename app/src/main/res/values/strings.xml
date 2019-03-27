@@ -31,4 +31,6 @@
     <string name="logout">Kijelentkezés</string>
     <string name="title_activity_tikets">Tikets</string>
     <string name="title_activity_contacts">Kapcsolat</string>
+    <string name="title_activity_gecifasz">Map</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

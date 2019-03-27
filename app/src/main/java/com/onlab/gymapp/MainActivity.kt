@@ -71,15 +71,15 @@ class MainActivity : AppCompatActivity() {
                     User.LoggedIn = false
                 }
             } else {
-                if (task.result["name"].equals("Error")) {
+                if (task.result!!["name"].equals("Error")) {
                     Toast.makeText(this, "Hiba történt az adatok kérésekor", Toast.LENGTH_LONG).show()
                     User.LoggedIn = false
                 } else {
-                    User.Name = task.result["name"]!!
+                    User.Name = task.result!!["name"]!!
                     val format = SimpleDateFormat("yyyy.MM.dd")
-                    User.Birth = format.parse(task.result["birth"])
-                    User.Height = Integer.parseInt(task.result["height"]) as Integer
-                    User.Weight = Integer.parseInt(task.result["weight"]) as Integer
+                    User.Birth = format.parse(task.result!!["birth"])
+                    User.Height = Integer.parseInt(task.result!!["height"]) as Integer
+                    User.Weight = Integer.parseInt(task.result!!["weight"]) as Integer
                     User.LoggedIn = true
                 }
             }
@@ -173,4 +173,6 @@ class MainActivity : AppCompatActivity() {
     fun Contact (v:View){
         startActivity(Intent(this, ContactsActivity::class.java))
     }
+
+
 }

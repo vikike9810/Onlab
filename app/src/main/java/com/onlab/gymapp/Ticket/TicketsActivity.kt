@@ -28,13 +28,13 @@ class TicketsActivity : AppCompatActivity() {
         user = auth.currentUser!!
         getTicket().addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                when (task.result["type"]) {
-                    "1" -> {Ticket.type = Type.EGY_ALKALMAS;Ticket.DaysLeft = task.result["usages"]!!.toInt() }
-                    "5" -> {Ticket.type = Type.OT_ALKALMAS;Ticket.DaysLeft = task.result["usages"]!!.toInt() }
-                    "10" -> {Ticket.type = Type.TIZ_ALKALMAS;Ticket.DaysLeft = task.result["usages"]!!.toInt() }
+                when (task.result!!["type"]) {
+                    "1" -> {Ticket.type = Type.EGY_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt() }
+                    "5" -> {Ticket.type = Type.OT_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt() }
+                    "10" -> {Ticket.type = Type.TIZ_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt() }
                     "31" -> {
                         Ticket.type = Type.HAVI
-                        var date = task.result["expiration"].toString().toLong()
+                        var date = task.result!!["expiration"].toString().toLong()
                         Ticket.Date = Date( date*1000)
                     }
                     "noticket" -> Ticket.type = Type.NINCS
@@ -67,7 +67,7 @@ class TicketsActivity : AppCompatActivity() {
         buyTicketsFromServer(tag).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 var ticket = task.result
-                val jwt = JWT(ticket)
+                val jwt = JWT(ticket!!)
                 if (tag.equals("31")) {
                     var date = jwt.getClaim("exp").asDate()
                     Ticket.Date = date!!
@@ -96,7 +96,7 @@ class TicketsActivity : AppCompatActivity() {
         return functions.getHttpsCallable("buyTicket")
             .call(data)
             .continueWith { task ->
-                val result = task.result.data as String
+                val result = task.result!!.data as String
                 result
             }
     }
@@ -108,7 +108,7 @@ class TicketsActivity : AppCompatActivity() {
         return functions.getHttpsCallable("getTicket")
             .call(data)
             .continueWith { task ->
-                val result = task.result.data as HashMap<String, String>
+                val result = task.result!!.data as HashMap<String, String>
                 result
             }
 

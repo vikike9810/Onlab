@@ -1,7 +1,9 @@
 package com.onlab.gymapp.Contact
 
+import android.location.Geocoder
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.gms.maps.OnMapReadyCallback
 
 import com.onlab.gymapp.R
@@ -13,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_contacts.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ContactsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -25,7 +28,7 @@ class ContactsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        //setLayout()
+        setLayout()
     }
 
     /**
@@ -40,10 +43,11 @@ class ContactsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        var loc=getLocation(Gym.address)
+        val addr = LatLng(loc[0], loc[1])
+        mMap.addMarker(MarkerOptions().position(addr).title("Gym Address"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(addr))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f),1000, null)
     }
 
     private fun setLayout() {
@@ -58,6 +62,15 @@ class ContactsActivity : AppCompatActivity(), OnMapReadyCallback {
         ct_6.setText(Gym.saturday)
         ct_7.setText(Gym.sunday)
         ct_nyitva.setText("A mai napon " + getNyitvatartas()+"-ig van nyitva")
+    }
+
+    private fun getLocation(s :String):ArrayList<Double>{
+        var geo=Geocoder(this,Locale.getDefault())
+        var loc=geo.getFromLocationName(s,1)
+        var ret=ArrayList<Double>(2)
+        ret.add(loc[0].latitude)
+        ret.add(loc[0].longitude)
+        return  ret
     }
 
     private fun getNyitvatartas(): String {
