@@ -45,7 +45,7 @@ class ContactsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         var loc=getLocation(Gym.address)
         val addr = LatLng(loc[0], loc[1])
-        mMap.addMarker(MarkerOptions().position(addr).title("Gym Address"))
+        mMap.addMarker(MarkerOptions().position(addr).title(Gym.name))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(addr))
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15f),1000, null)
     }

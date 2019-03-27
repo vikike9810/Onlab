@@ -17,6 +17,7 @@ import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
 import com.google.firebase.storage.FirebaseStorage
 import com.onlab.gymapp.Contact.ContactsActivity
+import com.onlab.gymapp.Contact.Gym
 import com.onlab.gymapp.Login.Login
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.Profile.profilePictureTask
@@ -30,10 +31,12 @@ class MainActivity : AppCompatActivity() {
     companion object {
         var user: FirebaseUser? = null
     }
+
     private lateinit var auth: FirebaseAuth
     private lateinit var functions: FirebaseFunctions
     var storage = FirebaseStorage.getInstance()
     var item: MenuItem? = null
+    private var root: Object = Object()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +50,9 @@ class MainActivity : AppCompatActivity() {
             User.LoggedIn = true
             getUserDetails()
         }
-
+        if (!Gym.loaded) {
+            getContactDetails()
+        }
     }
 
     override fun onResume() {
@@ -166,12 +171,44 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun Go_Tickets(v:View){
+    fun Go_Tickets(v: View) {
         startActivity(Intent(this, TicketsActivity::class.java))
     }
 
-    fun Contact (v:View){
+    fun Contact(v: View) {
         startActivity(Intent(this, ContactsActivity::class.java))
+    }
+
+    private fun getContactDetails() {
+        getContactDetailsFromServer().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Toast.makeText(this, "Betöltve...", Toast.LENGTH_LONG).show()
+
+                    Gym.name = task.result!!["name"]!!
+                    Gym.phone = task.result!!["phone"]!!
+                    Gym.address = task.result!!["address"]!!
+                    Gym.monday = task.result!!["monday"]!!
+                    Gym.tuesday = task.result!!["tuesday"]!!
+                    Gym.wednesday = task.result!!["wednesday"]!!
+                    Gym.thursday = task.result!!["thursday"]!!
+                    Gym.friday = task.result!!["friday"]!!
+                    Gym.saturday = task.result!!["saturday"]!!
+                    Gym.sunday = task.result!!["sunday"]!!
+                    Gym.loaded = true
+            } else {
+                Toast.makeText(this, "Hiba történt az adatok kérésekor", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun getContactDetailsFromServer(): Task<HashMap<String, String>> {
+        return functions.getHttpsCallable("getContact")
+            .call()
+            .continueWith { task ->
+                Toast.makeText(this, "Töltés...", Toast.LENGTH_LONG).show()
+                val result = task.result!!.data as HashMap<String, String>
+                result
+            }
     }
 
 
