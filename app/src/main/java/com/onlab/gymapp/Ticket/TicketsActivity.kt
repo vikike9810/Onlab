@@ -10,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
 import com.onlab.gymapp.R
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -26,6 +25,7 @@ class TicketsActivity : AppCompatActivity() {
         functions = FirebaseFunctions.getInstance()
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser!!
+        if (!Ticket.loaded){
         getTicket().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 when (task.result!!["type"]) {
@@ -39,11 +39,15 @@ class TicketsActivity : AppCompatActivity() {
                     }
                     "noticket" -> Ticket.type = Type.NINCS
                 }
-
+                Ticket.loaded = true
                 showFragment()
             } else {
                 Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
             }
+        }
+        }
+        else{
+            showFragment()
         }
     }
 
@@ -81,6 +85,7 @@ class TicketsActivity : AppCompatActivity() {
                         10 -> Ticket.type = Type.TIZ_ALKALMAS
                     }
                 }
+                Ticket.loaded = true
                 showFragment()
             } else {
 

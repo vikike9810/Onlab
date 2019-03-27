@@ -6,4 +6,5 @@ object Ticket {
     var type: Type = Type.NINCS
     var Date: Date = Date(2019, 9, 20)
     var DaysLeft: Int = 8
+    var loaded: Boolean = false
 }

@@ -21,12 +21,13 @@ import com.onlab.gymapp.Contact.Gym
 import com.onlab.gymapp.Login.Login
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.Profile.profilePictureTask
+import com.onlab.gymapp.Ticket.Ticket
 import com.onlab.gymapp.Ticket.TicketsActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnCompleteListener<HashMap<String, String>> {
 
     companion object {
         var user: FirebaseUser? = null
@@ -36,12 +37,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var functions: FirebaseFunctions
     var storage = FirebaseStorage.getInstance()
     var item: MenuItem? = null
-    private var root: Object = Object()
+    private var lock: Object = Object()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+        setContentView(R.layout.splash_screen)
         auth = FirebaseAuth.getInstance()
         functions = FirebaseFunctions.getInstance()
         user = auth.currentUser
@@ -52,7 +52,11 @@ class MainActivity : AppCompatActivity() {
         }
         if (!Gym.loaded) {
             getContactDetails()
+        } else {
+            setContentView(R.layout.activity_main)
+            setSupportActionBar(toolbar)
         }
+
     }
 
     override fun onResume() {
@@ -67,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getUserDetails() {
-        getDetailsFromServer().addOnCompleteListener(OnCompleteListener { task ->
+        getDetailsFromServer().addOnCompleteListener { task ->
             if (!task.isSuccessful) {
                 val e = task.exception
                 if (e is FirebaseFunctionsException) {
@@ -88,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                     User.LoggedIn = true
                 }
             }
-        })
+        }
         var storageRef = storage.reference
         var imageRef = storageRef.child("images/" + user?.uid + ".jpg")
         imageRef.getBytes(1024 * 1024).addOnSuccessListener {
@@ -157,9 +161,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun resetUser() {
         User.resetUser(this.resources)
+        Ticket.loaded = false
     }
 
     fun Profil(v: View) {
+        if(User.LoggedIn)
         startActivity(Intent(this, ProfilActivity::class.java))
     }
 
@@ -172,6 +178,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun Go_Tickets(v: View) {
+        if (User.LoggedIn)
         startActivity(Intent(this, TicketsActivity::class.java))
     }
 
@@ -180,25 +187,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getContactDetails() {
-        getContactDetailsFromServer().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Toast.makeText(this, "Betöltve...", Toast.LENGTH_LONG).show()
-
-                    Gym.name = task.result!!["name"]!!
-                    Gym.phone = task.result!!["phone"]!!
-                    Gym.address = task.result!!["address"]!!
-                    Gym.monday = task.result!!["monday"]!!
-                    Gym.tuesday = task.result!!["tuesday"]!!
-                    Gym.wednesday = task.result!!["wednesday"]!!
-                    Gym.thursday = task.result!!["thursday"]!!
-                    Gym.friday = task.result!!["friday"]!!
-                    Gym.saturday = task.result!!["saturday"]!!
-                    Gym.sunday = task.result!!["sunday"]!!
-                    Gym.loaded = true
-            } else {
-                Toast.makeText(this, "Hiba történt az adatok kérésekor", Toast.LENGTH_LONG).show()
-            }
-        }
+        getContactDetailsFromServer().addOnCompleteListener(this)
     }
 
     private fun getContactDetailsFromServer(): Task<HashMap<String, String>> {
@@ -209,6 +198,28 @@ class MainActivity : AppCompatActivity() {
                 val result = task.result!!.data as HashMap<String, String>
                 result
             }
+    }
+
+    override fun onComplete(task: Task<HashMap<String, String>>) {
+        if (task.isSuccessful) {
+            Toast.makeText(this, "Betöltve...", Toast.LENGTH_LONG).show()
+            Gym.name = task.result!!["name"]!!
+            Gym.phone = task.result!!["phone"]!!
+            Gym.address = task.result!!["address"]!!
+            Gym.monday = task.result!!["monday"]!!
+            Gym.tuesday = task.result!!["tuesday"]!!
+            Gym.wednesday = task.result!!["wednesday"]!!
+            Gym.thursday = task.result!!["thursday"]!!
+            Gym.friday = task.result!!["friday"]!!
+            Gym.saturday = task.result!!["saturday"]!!
+            Gym.sunday = task.result!!["sunday"]!!
+            Gym.loaded = true
+            Thread.sleep(1000)
+            setContentView(R.layout.activity_main)
+            setSupportActionBar(toolbar)
+        } else {
+            Toast.makeText(this, "Hiba történt az adatok kérésekor", Toast.LENGTH_LONG).show()
+        }
     }
 
 

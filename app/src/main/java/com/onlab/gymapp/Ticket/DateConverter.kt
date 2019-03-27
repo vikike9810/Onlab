@@ -15,7 +15,7 @@ class DateConverter {
             if (day < 10) {
                 sday = "0" + day.toString()
             }
-            if (month < 10) {
+            if (month < 9) {
                 smonth = "0" + (month + 1).toString()
             }
             return syear + "." + smonth + "." + sday
