@@ -25,30 +25,7 @@ class TicketsActivity : AppCompatActivity() {
         functions = FirebaseFunctions.getInstance()
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser!!
-        if (!Ticket.loaded){
-        getTicket().addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                when (task.result!!["type"]) {
-                    "1" -> {Ticket.type = Type.EGY_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt() }
-                    "5" -> {Ticket.type = Type.OT_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt() }
-                    "10" -> {Ticket.type = Type.TIZ_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt() }
-                    "31" -> {
-                        Ticket.type = Type.HAVI
-                        var date = task.result!!["expiration"].toString().toLong()
-                        Ticket.Date = Date( date*1000)
-                    }
-                    "noticket" -> Ticket.type = Type.NINCS
-                }
-                Ticket.loaded = true
-                showFragment()
-            } else {
-                Toast.makeText(this, task.exception.toString(), Toast.LENGTH_SHORT).show()
-            }
-        }
-        }
-        else{
-            showFragment()
-        }
+        showFragment()
     }
 
 
@@ -85,6 +62,7 @@ class TicketsActivity : AppCompatActivity() {
                         10 -> Ticket.type = Type.TIZ_ALKALMAS
                     }
                 }
+                Ticket.token = ticket
                 Ticket.loaded = true
                 showFragment()
             } else {
@@ -106,17 +84,5 @@ class TicketsActivity : AppCompatActivity() {
             }
     }
 
-    private fun getTicket(): Task<HashMap<String, String>> {
-        val data = hashMapOf(
-            "userid" to user.uid
-        )
-        return functions.getHttpsCallable("getTicket")
-            .call(data)
-            .continueWith { task ->
-                val result = task.result!!.data as HashMap<String, String>
-                result
-            }
-
-    }
 
 }
