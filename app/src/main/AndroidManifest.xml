@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.onlab.gymapp">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -17,7 +16,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
+        <activity android:name=".Training.TodayActivity">
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -36,15 +36,19 @@
         </activity>
         <activity
                 android:name=".Ticket.TicketsActivity"
-                android:label="@string/title_activity_tikets"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:label="@string/tickets">
         </activity>
-        <activity android:name=".ProfilActivity">
+        <activity
+                android:name=".ProfilActivity"
+                android:label="@string/profil">
         </activity>
         <activity
                 android:name=".SettingsActivity"
-                android:label="@string/title_activity_settings"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:label="@string/title_activity_settings">
+        </activity>
+        <activity
+                android:name=".Training.TrainingActivity"
+                android:label="@string/trains">
         </activity>
         <activity
                 android:name=".MainActivity"

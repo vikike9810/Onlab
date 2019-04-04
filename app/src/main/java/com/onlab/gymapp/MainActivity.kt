@@ -24,6 +24,7 @@ import com.onlab.gymapp.Profile.profilePictureTask
 import com.onlab.gymapp.Ticket.Ticket
 import com.onlab.gymapp.Ticket.TicketsActivity
 import com.onlab.gymapp.Ticket.Type
+import com.onlab.gymapp.Training.TrainingActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
@@ -194,6 +195,11 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
             startActivity(Intent(this, TicketsActivity::class.java))
     }
 
+    fun Trainings(v:View){
+        if (User.LoggedIn)
+            startActivity(Intent(this, TrainingActivity::class.java))
+    }
+
     fun Contact(v: View) {
         startActivity(Intent(this, ContactsActivity::class.java))
     }
@@ -283,4 +289,6 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
             inited = true
         }
     }
+
+
 }

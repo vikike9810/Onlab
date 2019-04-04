@@ -37,4 +37,7 @@
     <string name="onlogout">Bejelentkezve %1$s néven. Biztosan kilépsz?</string>
     <string name="ok">Igen</string>
     <string name="cancel">Mégse</string>
+    <string name="trains">Edzések</string>
+    <string name="next_today"><![CDATA[Tovább a mai napra >>>]]></string>
+    <string name="tickets">Jegyek</string>
 </resources>
