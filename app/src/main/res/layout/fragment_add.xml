@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+
+
+        <TableRow>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_column="1"
+                    android:text="Típusa"
+                    android:textSize="15sp"/>
+
+            <Spinner
+                    android:id="@+id/fm_training_type"
+                    android:width="200dp"
+                    android:padding="2dp"/>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_column="1"
+                    android:text="Időtartama"
+                    android:textSize="15sp"/>
+
+            <EditText
+                    android:id="@+id/fm_duration"
+                    android:width="200dp"
+                    android:textSize="15sp"
+                    android:inputType="number"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_column="1"
+                    android:text="Elégetett Kalória"
+                    android:textSize="15sp"/>
+
+            <EditText
+                    android:id="@+id/fm_kcal"
+                    android:width="200dp"
+                    android:textSize="15sp"
+                    android:inputType="number"/>
+
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_column="1"
+                    android:gravity="center"
+                    android:text="Mégsem"
+                    android:textSize="15sp"/>
+
+            <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="wrap_content"
+                    android:gravity="center"
+                    android:text="Mentés"
+                    android:textSize="15sp"/>
+
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

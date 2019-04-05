@@ -20,6 +20,11 @@ class TrainingAdapter(val items : ArrayList<Training>, val context: Context)
         return items.size
     }
 
+    fun AddTraining(t:Training){
+        items.add(t)
+        notifyItemInserted(items.lastIndex)
+    }
+
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.rv_durability?.text = items.get(p1).duration_in_min.toString()
         p0.rv_kcal?.text = items.get(p1).kcal.toString()
