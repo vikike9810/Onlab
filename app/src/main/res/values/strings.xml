@@ -30,4 +30,14 @@
     <string name="ment_s">Mentés</string>
     <string name="logout">Kijelentkezés</string>
     <string name="title_activity_tikets">Tikets</string>
+    <string name="title_activity_contacts">Kapcsolat</string>
+    <string name="title_activity_gecifasz">Map</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="nincs_rv_nyes_jegyed">Nincs érvényes jegyed!</string>
+    <string name="onlogout">Bejelentkezve %1$s néven. Biztosan kilépsz?</string>
+    <string name="ok">Igen</string>
+    <string name="cancel">Mégse</string>
+    <string name="trains">Edzések</string>
+    <string name="next_today"><![CDATA[Tovább a mai napra >>>]]></string>
+    <string name="tickets">Jegyek</string>
 </resources>

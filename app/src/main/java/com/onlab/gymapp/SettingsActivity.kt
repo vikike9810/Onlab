@@ -25,6 +25,7 @@ import com.onlab.gymapp.Profile.User
 import kotlinx.android.synthetic.main.activity_settings.*
 import com.onlab.gymapp.Login.DatePickerDialogFragment
 import com.onlab.gymapp.Profile.profilePictureTask
+import com.onlab.gymapp.Ticket.DateConverter
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
@@ -55,8 +56,7 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
     override fun onResume() {
         super.onResume()
         et_name_settings.setText(User.Name)
-        var year = User.Birth.year + 1900
-        et_birth_settings.setText(DateConverter(year, User.Birth.month, User.Birth.date))
+        et_birth_settings.setText(DateConverter.convert(User.Birth.year,User.Birth.month,User.Birth.date))
         et_height_settings.setText(User!!.Height?.toString())
         et_weight_settings.setText(User!!.Weight?.toString())
         refreshPicture()
@@ -64,20 +64,9 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
 
 
     override fun onDateSelected(year: Int, month: Int, day: Int) {
-        et_birth_settings.setText(DateConverter(year, month, day))
+        et_birth_settings.setText(DateConverter.convert(year,month,day))
     }
 
-    fun DateConverter(year: Int, month: Int, day: Int): String {
-        var sday = day.toString()
-        var smonth = (month + 1).toString()
-        if (day < 10) {
-            sday = "0" + day.toString()
-        }
-        if (month < 10) {
-            smonth = "0" + (month + 1).toString()
-        }
-        return (year).toString() + "." + smonth + "." + sday
-    }
 
 
     fun Save(v: View) {
@@ -129,7 +118,7 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
             "name" to User.Name,
             "height" to User.Height.toString(),
             "weight" to User.Weight.toString(),
-            "birth" to DateConverter(User.Birth.year + 1900, User.Birth.month, User.Birth.date)
+            "birth" to DateConverter.convert(User.Birth.year, User.Birth.month, User.Birth.date)
         )
 
         return functions.getHttpsCallable("setSettings")

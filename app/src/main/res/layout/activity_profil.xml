@@ -35,10 +35,11 @@
                   android:layout_margin="10dp">
 
         <Button
+                android:id="@+id/btn_ticket_profile"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="10dp"
-                android:text="Még 4 alkalmad maradt"
+                android:onClick="goToTickets"
                 android:background="@android:color/holo_blue_bright"/>
     </LinearLayout>
 

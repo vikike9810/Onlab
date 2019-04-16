@@ -6,52 +6,76 @@
 
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="Nincs érvényes jegyed"
+              android:text="@string/nincs_rv_nyes_jegyed"
               android:gravity="center"/>
+    <ScrollView android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <TableLayout android:layout_width="match_parent"
-                 android:layout_height="wrap_content">
+        <TableLayout android:layout_width="match_parent"
+                     android:layout_height="wrap_content">
 
-        <TableRow android:padding="10dp">
+            <TableRow android:padding="10dp">
 
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="Jegy Vásárlás"/>
-        </TableRow>
+                <TextView android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Jegy Vásárlás"/>
+            </TableRow>
 
-        <TableRow android:padding="10dp">
-            <ImageButton
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp">
+            <TableRow android:padding="30dp" android:weightSum="4">
+                <Button
+                        android:id="@+id/btn_single"
+                        android:layout_weight="4"
+                        android:layout_height="100dp"
+                        android:background="@color/com_facebook_blue"
+                        android:text="1 alkalom"
+                        android:textSize="24sp"
+                        android:onClick="buyTicket"
+                        android:tag="1">
+                </Button>
+            </TableRow>
 
-            </ImageButton>
-        </TableRow>
+            <TableRow android:padding="30dp" android:weightSum="1">
+                <Button
+                        android:id="@+id/btn_five_time"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:background="@color/colorPrimary"
+                        android:text="5 alkalom"
+                        android:textSize="24sp"
+                        android:onClick="buyTicket"
+                        android:tag="5">
 
-        <TableRow android:padding="10dp">
-            <ImageButton
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                </Button>
+            </TableRow>
 
-            </ImageButton>
-        </TableRow>
+            <TableRow android:padding="30dp" android:weightSum="1">
+                <Button
+                        android:id="@+id/btn_ten_time"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:background="@color/colorAccent"
+                        android:text="10 alkalom"
+                        android:textSize="24sp"
+                        android:onClick="buyTicket"
+                        android:tag="10">
 
-        <TableRow android:padding="10dp">
-            <ImageButton
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
+                </Button>
+            </TableRow>
 
-            </ImageButton>
-        </TableRow>
+            <TableRow android:padding="30dp" android:weightSum="1">
+                <Button
+                        android:id="@+id/btn_monthly"
+                        android:layout_weight="1"
+                        android:layout_height="100dp"
+                        android:background="#ffcc00"
+                        android:text="Havi"
+                        android:textSize="24sp"
+                        android:onClick="buyTicket"
+                        android:tag="31">
 
-        <TableRow android:padding="10dp">
-            <ImageButton
-                    android:layout_width="100dp"
-                    android:layout_height="100dp">
-
-            </ImageButton>
-        </TableRow>
+                </Button>
+            </TableRow>
 
 
-    </TableLayout>
-
+        </TableLayout>
+    </ScrollView>
 </LinearLayout>
