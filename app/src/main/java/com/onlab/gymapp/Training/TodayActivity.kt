@@ -30,12 +30,12 @@ class TodayActivity : AppCompatActivity(),AddFragment.TrainingCreatedListener {
     }
 
     private fun loadItems() {
-        adapter.AddTraining(Training(null,Training_Type.Kardio.toString(),20,200))
-        adapter.AddTraining(Training(null,Training_Type.Sulyzos_edzes.toString(),30,300))
-        adapter.AddTraining(Training(null,Training_Type.Nyujtas.toString(),10,100))
-        adapter.AddTraining(Training(null,Training_Type.Kardio.toString(),30,300))
-        adapter.AddTraining(Training(null,Training_Type.Nyujtas.toString(),30,300))
-        adapter.AddTraining(Training(null,Training_Type.Sulyzos_edzes.toString(),30,300))
+        adapter.AddTraining(Training(null,Training_Type.Kardio.toString(),20,200,""))
+        adapter.AddTraining(Training(null,Training_Type.Sulyzos_edzes.toString(),30,300,""))
+        adapter.AddTraining(Training(null,Training_Type.Nyujtas.toString(),10,100,""))
+        adapter.AddTraining(Training(null,Training_Type.Kardio.toString(),30,300,""))
+        adapter.AddTraining(Training(null,Training_Type.Nyujtas.toString(),30,300,""))
+        adapter.AddTraining(Training(null,Training_Type.Sulyzos_edzes.toString(),30,300,""))
         rv_training_list.adapter = adapter
         rv_training_list.layoutManager = LinearLayoutManager(this)
     }

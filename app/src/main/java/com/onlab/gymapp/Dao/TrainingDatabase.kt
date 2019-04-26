@@ -19,7 +19,7 @@ abstract class TrainingDatabase : RoomDatabase() {
 
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.applicationContext,
-                    TrainingDatabase::class.java, "training.db")
+                    TrainingDatabase::class.java, "training2.db")
                     .build()
             }
             return INSTANCE!!

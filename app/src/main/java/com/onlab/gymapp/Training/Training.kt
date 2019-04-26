@@ -20,5 +20,8 @@ data class Training  (
     var duration_in_min:Int=0,
 
    @ColumnInfo(name = "kcal")
-    var kcal: Int =0): Serializable
+    var kcal: Int =0,
+
+    @ColumnInfo(name = "date")
+    var date: String): Serializable
 

@@ -40,13 +40,13 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     fun loadTrainings(){
-        var training1=Training(null,Training_Type.Kardio.toString(),20,200)
-        var training2=Training(null,Training_Type.Kardio.toString(),30,300)
-        var training3=Training(null,Training_Type.Kardio.toString(),10,100)
-        var training4=Training(null,Training_Type.Kardio.toString(),30,300)
-        var training5=Training(null,Training_Type.Kardio.toString(),30,300)
-        var training6=Training(null,Training_Type.Kardio.toString(),30,300)
-        var training7=Training(null,Training_Type.Kardio.toString(),30,300)
+        var training1=Training(null,Training_Type.Kardio.toString(),20,200,"")
+        var training2=Training(null,Training_Type.Kardio.toString(),30,300,"")
+        var training3=Training(null,Training_Type.Kardio.toString(),10,100,"")
+        var training4=Training(null,Training_Type.Kardio.toString(),30,300,"")
+        var training5=Training(null,Training_Type.Kardio.toString(),30,300,"")
+        var training6=Training(null,Training_Type.Kardio.toString(),30,300,"")
+        var training7=Training(null,Training_Type.Kardio.toString(),30,300,"")
 
         var day1=Training_Day()
         day1.add_Train(training1)

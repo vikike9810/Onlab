@@ -51,10 +51,14 @@ class TrainingAdapter(val items : ArrayList<Training>, val context: Context)
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.rv_durability?.text = items.get(p1).duration_in_min.toString()
         p0.rv_kcal?.text = items.get(p1).kcal.toString()
+        p0.date.text=items.get(p1).date
         when(items.get(p1).type) {
             Training_Type.Kardio.toString()-> p0.rv_im?.setImageResource(R.drawable.run)
             Training_Type.Nyujtas.toString()-> p0.rv_im?.setImageResource(R.drawable.yoga)
             Training_Type.Sulyzos_edzes.toString()-> p0.rv_im?.setImageResource(R.drawable.body)
+        }
+        p0.btn.setOnClickListener {
+            deleteItem(p0.adapterPosition)
         }
     }
 }
@@ -64,4 +68,6 @@ class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val rv_durability = view.rv_dur
     val rv_kcal = view.rv_kcal
     val rv_im=view.training_im
+    val btn=view.btn_delete
+    val date=view.rv_date
 }

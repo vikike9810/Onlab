@@ -9,6 +9,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.onlab.gymapp.R
 import kotlinx.android.synthetic.main.fragment_add.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.text.DateFormat
+import java.util.*
+
 
 class AddFragment : DialogFragment(){
 
@@ -43,6 +48,15 @@ class AddFragment : DialogFragment(){
             listOf("Súlyzós", "Kardió", "Nyújtás")
         )
 
+        fun getcurrDate():String{
+            var date:String=""
+
+            val calendar = Calendar.getInstance()
+            date = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime())
+
+            return date
+        }
+
         btnSave.setOnClickListener {
             val selectedType = when (fm_training_type.selectedItemPosition) {
                 0 ->Training_Type.Sulyzos_edzes
@@ -55,7 +69,8 @@ class AddFragment : DialogFragment(){
                     Training(null,
                         selectedType.toString(),
                         fm_duration.text.toString().toInt(),
-                        fm_kcal.text.toString().toInt()
+                        fm_kcal.text.toString().toInt(),
+                        getcurrDate()
                     )
                 )
                 dismiss()
