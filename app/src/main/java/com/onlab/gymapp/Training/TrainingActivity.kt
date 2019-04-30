@@ -48,26 +48,42 @@ class TrainingActivity : AppCompatActivity() {
         var training6=Training(null,Training_Type.Kardio.toString(),30,300,"")
         var training7=Training(null,Training_Type.Kardio.toString(),30,300,"")
 
-        var day1=Training_Day()
-        day1.add_Train(training1)
-        day1.add_Train(training2)
+        var list1=ArrayList<Training>()
+        list1.add(training1)
+        list1.add(training2)
+        var day1=createTrainingDayfromlist(list1)
 
-        var day2=Training_Day()
-        day2.add_Train(training3)
-        day2.add_Train(training4)
+        var list2=ArrayList<Training>()
+        list2.add(training3)
+        list2.add(training4)
+        var day2=createTrainingDayfromlist(list2)
 
-        var day3=Training_Day()
-        day3.add_Train(training5)
-        day3.add_Train(training4)
-        day3.add_Train(training6)
+        var list3=ArrayList<Training>()
+        list3.add(training5)
+        list3.add(training4)
+        list3.add(training6)
+        var day3=createTrainingDayfromlist(list3)
 
-        var day4=Training_Day()
-        day4.add_Train(training7)
+        var list4=ArrayList<Training>()
+        list4.add(training7)
+        var day4=createTrainingDayfromlist(list4)
 
         List_of_TraningDays.add(day1)
         List_of_TraningDays.add(day2)
         List_of_TraningDays.add(day3)
         List_of_TraningDays.add(day4)
+    }
+
+
+    fun createTrainingDayfromlist(list :List<Training>):Training_Day{
+        var first=list.get(0)
+        var newday =Training_Day()
+        newday.date=first.date
+        for(i in list){
+            newday.duration_sum+=i.duration_in_min
+            newday.kcal_sum+=i.kcal
+        }
+        return newday
     }
 
     fun nextButton(v: View){
