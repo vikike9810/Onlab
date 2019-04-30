@@ -27,6 +27,13 @@ abstract class TrainingDatabase : RoomDatabase() {
         fun destroyDataBase(){
             INSTANCE = null
         }
+
+        fun existDatabase():Boolean{
+            if(INSTANCE==null){
+                return false
+            }
+            return true
+        }
     }
 
 

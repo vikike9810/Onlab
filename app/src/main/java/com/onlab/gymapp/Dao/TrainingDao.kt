@@ -16,6 +16,8 @@ interface TrainingDao {
     @Query("SELECT * FROM Training")
     fun getAll():List<Training>
 
+    
+
     @Insert
     fun insert(training: Training): Long
 

@@ -48,14 +48,6 @@ class AddFragment : DialogFragment(){
             listOf("Súlyzós", "Kardió", "Nyújtás")
         )
 
-        fun getcurrDate():String{
-            var date:String=""
-
-            val calendar = Calendar.getInstance()
-            date = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime())
-
-            return date
-        }
 
         btnSave.setOnClickListener {
             val selectedType = when (fm_training_type.selectedItemPosition) {
@@ -94,6 +86,18 @@ class AddFragment : DialogFragment(){
 
     interface TrainingCreatedListener {
         fun onTrainingCreated(training: Training)
+    }
+
+    companion object {
+
+        fun getcurrDate(): String {
+            var date: String = ""
+
+            val calendar = Calendar.getInstance()
+            date = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.getTime())
+
+            return date
+        }
     }
 
 }

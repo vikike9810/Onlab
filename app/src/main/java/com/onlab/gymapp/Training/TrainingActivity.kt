@@ -3,10 +3,13 @@ package com.onlab.gymapp.Training
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+
 import android.view.View
+import com.onlab.gymapp.Dao.TrainingDatabase
 import com.onlab.gymapp.R
 import kotlinx.android.synthetic.main.activity_training.*
 import kotlinx.android.synthetic.main.train_layout.view.*
+
 
 class TrainingActivity : AppCompatActivity() {
 
@@ -17,7 +20,6 @@ class TrainingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_training)
         List_of_TraningDays= ArrayList<Training_Day>()
         loadTrainings()
-        load_View()
     }
 
     fun load_View(){
@@ -34,17 +36,18 @@ class TrainingActivity : AppCompatActivity() {
             }
             rowView.lay_dur.setText(i.duration_sum.toString())
             rowView.lay_kcal.setText(i.kcal_sum.toString())
+            rowView.lay_date.setText(i.date)
             Lay_Trains.addView(rowView)
             cnt++
         }
     }
 
     fun loadTrainings(){
-        var training1=Training(null,Training_Type.Kardio.toString(),20,200,"")
+        var training1=Training(null,Training_Type.Kardio.toString(),20,200,"2014.04.05")
         var training2=Training(null,Training_Type.Kardio.toString(),30,300,"")
-        var training3=Training(null,Training_Type.Kardio.toString(),10,100,"")
-        var training4=Training(null,Training_Type.Kardio.toString(),30,300,"")
-        var training5=Training(null,Training_Type.Kardio.toString(),30,300,"")
+        var training3=Training(null,Training_Type.Kardio.toString(),10,100,"2015.36.63")
+        var training4=Training(null,Training_Type.Kardio.toString(),30,300,"2010.15.16")
+        var training5=Training(null,Training_Type.Kardio.toString(),30,300,"2017.12.05")
         var training6=Training(null,Training_Type.Kardio.toString(),30,300,"")
         var training7=Training(null,Training_Type.Kardio.toString(),30,300,"")
 
@@ -72,6 +75,35 @@ class TrainingActivity : AppCompatActivity() {
         List_of_TraningDays.add(day2)
         List_of_TraningDays.add(day3)
         List_of_TraningDays.add(day4)
+
+        checkDate()
+    }
+
+    fun checkDate(){
+
+            val dbThread = Thread {
+                     var items: List<Training>? =null
+                     items= TrainingDatabase.getAppDataBase(this)!!.TrainingDao().getAll() ?: null
+                    runOnUiThread {
+                        if (!(items == null) && items.isNotEmpty()) {
+                            if (!(AddFragment.getcurrDate().equals(items.get(0).date))) {
+                                var today = createTrainingDayfromlist(items)
+                                List_of_TraningDays.add(today)
+                                DeleteAll()
+                            }
+                        }
+                        load_View()
+
+                    }
+            }
+            dbThread.start()
+    }
+
+    fun DeleteAll(){
+        val dbThread = Thread {
+            TrainingDatabase.getAppDataBase(this)!!.TrainingDao().deleteAll()
+        }
+        dbThread.start()
     }
 
 
