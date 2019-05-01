@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
 import android.view.View
+import com.onlab.gymapp.Dao.DayDatabase
 import com.onlab.gymapp.Dao.TrainingDatabase
 import com.onlab.gymapp.R
 import kotlinx.android.synthetic.main.activity_training.*
@@ -43,7 +44,21 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     fun loadTrainings(){
-        var training1=Training(null,Training_Type.Kardio.toString(),20,200,"2014.04.05")
+
+        val dbThread = Thread {
+            var items: List<Training_Day>? =null
+            items=DayDatabase.getAppDataBase(this)!!.DayDao().getAll() ?: null
+            runOnUiThread {
+                if (!(items == null)) {
+                        List_of_TraningDays.addAll(items)
+                }
+                checkDate()
+
+            }
+        }
+        dbThread.start()
+
+       /* var training1=Training(null,Training_Type.Kardio.toString(),20,200,"2014.04.05")
         var training2=Training(null,Training_Type.Kardio.toString(),30,300,"")
         var training3=Training(null,Training_Type.Kardio.toString(),10,100,"2015.36.63")
         var training4=Training(null,Training_Type.Kardio.toString(),30,300,"2010.15.16")
@@ -72,11 +87,14 @@ class TrainingActivity : AppCompatActivity() {
         var day4=createTrainingDayfromlist(list4)
 
         List_of_TraningDays.add(day1)
+        saveDay(day1)
         List_of_TraningDays.add(day2)
+        saveDay(day2)
         List_of_TraningDays.add(day3)
+        saveDay(day3)
         List_of_TraningDays.add(day4)
+        saveDay(day4)*/
 
-        checkDate()
     }
 
     fun checkDate(){
@@ -89,6 +107,7 @@ class TrainingActivity : AppCompatActivity() {
                             if (!(AddFragment.getcurrDate().equals(items.get(0).date))) {
                                 var today = createTrainingDayfromlist(items)
                                 List_of_TraningDays.add(today)
+                                saveDay(today)
                                 DeleteAll()
                             }
                         }
@@ -102,6 +121,15 @@ class TrainingActivity : AppCompatActivity() {
     fun DeleteAll(){
         val dbThread = Thread {
             TrainingDatabase.getAppDataBase(this)!!.TrainingDao().deleteAll()
+        }
+        dbThread.start()
+    }
+
+    fun saveDay(d :Training_Day){
+
+        val dbThread = Thread {
+            val id = DayDatabase.getAppDataBase(this)!!.DayDao().insert(d)
+            d.itemId = id
         }
         dbThread.start()
     }
