@@ -55,6 +55,7 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
                     user = auth.currentUser!!
                     MainActivity.user = user
                     val id = user?.uid
+                    User.usID=id
                     Toast.makeText(this, "Sikeres belépés", Toast.LENGTH_LONG).show()
                     User.LoggedIn = false
                     finish()
@@ -159,6 +160,7 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
                 if (task.isSuccessful) {
                     user = auth.currentUser!!
                     MainActivity.user = user
+                    User.usID=user.uid
                     User.LoggedIn = false
                     addName(user!!.displayName ?: "nincs név")
                     finish()

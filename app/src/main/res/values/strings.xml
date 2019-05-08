@@ -40,4 +40,6 @@
     <string name="trains">Edzések</string>
     <string name="next_today"><![CDATA[Tovább a mai napra >>>]]></string>
     <string name="tickets">Jegyek</string>
+    <string name="napl_ment_se">Napló mentése</string>
+    <string name="napl_friss_t_se">Napló frissítése</string>
 </resources>

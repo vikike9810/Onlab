@@ -28,11 +28,8 @@ abstract class TrainingDatabase : RoomDatabase() {
             INSTANCE = null
         }
 
-        fun existDatabase():Boolean{
-            if(INSTANCE==null){
-                return false
-            }
-            return true
+        fun getDBPath(c:Context):String{
+            return c.getDatabasePath("training2.db").absolutePath
         }
     }
 

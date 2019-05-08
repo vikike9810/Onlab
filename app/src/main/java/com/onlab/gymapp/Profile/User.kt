@@ -17,6 +17,7 @@ object User {
     var Weight: Integer
     var Birth: Date
     var LoggedIn: Boolean
+    var usID:String="nincs Id"
     lateinit var imgUrl: String
     lateinit var image: Bitmap
 

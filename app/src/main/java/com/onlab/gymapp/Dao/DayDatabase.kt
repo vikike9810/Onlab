@@ -18,14 +18,22 @@ abstract class DayDatabase : RoomDatabase() {
         fun getAppDataBase(context: Context): DayDatabase? {
 
             if (INSTANCE == null) {
-                INSTANCE = Room.databaseBuilder(context.applicationContext,
-                    DayDatabase::class.java, "trainingday2.db")
+                INSTANCE = Room.databaseBuilder(
+                    context.applicationContext,
+                    DayDatabase::class.java, "trainingday2.db"
+                )
                     .build()
             }
             return INSTANCE!!
         }
-        fun destroyDataBase(){
+
+        fun destroyDataBase() {
             INSTANCE = null
         }
+
+        fun getDBPath(c: Context): String {
+            return c.getDatabasePath("trainingday2.db").absolutePath
+        }
+
     }
 }

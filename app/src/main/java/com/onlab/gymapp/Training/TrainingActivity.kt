@@ -3,13 +3,24 @@ package com.onlab.gymapp.Training
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 
 import android.view.View
+import android.widget.Toast
 import com.onlab.gymapp.Dao.DayDatabase
 import com.onlab.gymapp.Dao.TrainingDatabase
+import com.onlab.gymapp.DialogFragments.LogoutDialogFragment
+import com.onlab.gymapp.Login.Login
+import com.onlab.gymapp.MainActivity
+import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.R
+import com.onlab.gymapp.SettingsActivity
+import com.onlab.gymapp.Storage.DBStorage
 import kotlinx.android.synthetic.main.activity_training.*
 import kotlinx.android.synthetic.main.train_layout.view.*
+import java.io.File
+import kotlinx.android.synthetic.main.activity_training.view.*
 
 
 class TrainingActivity : AppCompatActivity() {
@@ -17,14 +28,36 @@ class TrainingActivity : AppCompatActivity() {
     lateinit var List_of_TraningDays: ArrayList<Training_Day>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_training)
         List_of_TraningDays= ArrayList<Training_Day>()
+        super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme_NoActionBar)
+        setContentView(R.layout.activity_training)
         loadTrainings()
+        setSupportActionBar(Lay_toolbar)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.restore_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_save -> {
+                DBStorage.saveFiles(User.usID ,this,List_of_TraningDays)
+                return true
+            }
+            R.id.action_refresh -> {
+                DBStorage.downloadFiles(User.usID ,this,this)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun load_View(){
         var cnt=0
+        Lay_Trains.removeAllViews()
         for( i in List_of_TraningDays) {
             var rowView = layoutInflater.inflate(R.layout.train_layout, null)
             when(cnt%7){
@@ -41,6 +74,7 @@ class TrainingActivity : AppCompatActivity() {
             Lay_Trains.addView(rowView)
             cnt++
         }
+        Toast.makeText(this,"klj",Toast.LENGTH_LONG).show()
     }
 
     fun loadTrainings(){
@@ -57,44 +91,6 @@ class TrainingActivity : AppCompatActivity() {
             }
         }
         dbThread.start()
-
-       /* var training1=Training(null,Training_Type.Kardio.toString(),20,200,"2014.04.05")
-        var training2=Training(null,Training_Type.Kardio.toString(),30,300,"")
-        var training3=Training(null,Training_Type.Kardio.toString(),10,100,"2015.36.63")
-        var training4=Training(null,Training_Type.Kardio.toString(),30,300,"2010.15.16")
-        var training5=Training(null,Training_Type.Kardio.toString(),30,300,"2017.12.05")
-        var training6=Training(null,Training_Type.Kardio.toString(),30,300,"")
-        var training7=Training(null,Training_Type.Kardio.toString(),30,300,"")
-
-        var list1=ArrayList<Training>()
-        list1.add(training1)
-        list1.add(training2)
-        var day1=createTrainingDayfromlist(list1)
-
-        var list2=ArrayList<Training>()
-        list2.add(training3)
-        list2.add(training4)
-        var day2=createTrainingDayfromlist(list2)
-
-        var list3=ArrayList<Training>()
-        list3.add(training5)
-        list3.add(training4)
-        list3.add(training6)
-        var day3=createTrainingDayfromlist(list3)
-
-        var list4=ArrayList<Training>()
-        list4.add(training7)
-        var day4=createTrainingDayfromlist(list4)
-
-        List_of_TraningDays.add(day1)
-        saveDay(day1)
-        List_of_TraningDays.add(day2)
-        saveDay(day2)
-        List_of_TraningDays.add(day3)
-        saveDay(day3)
-        List_of_TraningDays.add(day4)
-        saveDay(day4)*/
-
     }
 
     fun checkDate(){
@@ -104,7 +100,7 @@ class TrainingActivity : AppCompatActivity() {
                      items= TrainingDatabase.getAppDataBase(this)!!.TrainingDao().getAll() ?: null
                     runOnUiThread {
                         if (!(items == null) && items.isNotEmpty()) {
-                            if (!(AddFragment.getcurrDate().equals(items.get(0).date))) {
+                            if (!(AddFragment.getcurrDate().equals(" rw"))) {//items.get(0).date
                                 var today = createTrainingDayfromlist(items)
                                 List_of_TraningDays.add(today)
                                 saveDay(today)
@@ -146,6 +142,22 @@ class TrainingActivity : AppCompatActivity() {
         return newday
     }
 
+    fun updateList(list:ArrayList<Training_Day>){
+        List_of_TraningDays.clear()
+        List_of_TraningDays.addAll(list)
+        deleteDB()
+        load_View()
+        for(item in List_of_TraningDays){
+            saveDay(item)
+        }
+    }
+
+    fun deleteDB(){
+        val dbThread = Thread {
+            DayDatabase.getAppDataBase(this)!!.DayDao().deleteAll()
+        }
+        dbThread.start()
+    }
     fun nextButton(v: View){
         startActivity(Intent(this, TodayActivity::class.java))
     }
