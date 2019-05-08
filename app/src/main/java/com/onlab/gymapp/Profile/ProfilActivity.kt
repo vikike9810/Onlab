@@ -1,21 +1,15 @@
-package com.onlab.gymapp
+package com.onlab.gymapp.Profile
 
-import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.onlab.gymapp.Profile.User
-import com.onlab.gymapp.Profile.profilePictureTask
+import com.onlab.gymapp.R
+import com.onlab.gymapp.SettingsActivity
 import com.onlab.gymapp.Ticket.Ticket
 import com.onlab.gymapp.Ticket.TicketsActivity
 import com.onlab.gymapp.Ticket.Type
 import kotlinx.android.synthetic.main.activity_profil.*
-import java.net.URL
 import java.util.*
 import java.util.concurrent.TimeUnit
 

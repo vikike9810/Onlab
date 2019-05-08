@@ -44,17 +44,17 @@ class TicketsActivity : AppCompatActivity() {
     }
 
     fun buyTicket(v: View) {
-        var tag = v.tag.toString()
+        val tag = v.tag.toString()
         buyTicketsFromServer(tag).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                var ticket = task.result
+                val ticket = task.result
                 val jwt = JWT(ticket!!)
                 if (tag.equals("31")) {
-                    var date = jwt.getClaim("exp").asDate()
+                    val date = jwt.getClaim("exp").asDate()
                     Ticket.Date = date!!
                     Ticket.type = Type.HAVI
                 } else {
-                    var daysleft = jwt.getClaim("usages").asInt()
+                    val daysleft = jwt.getClaim("usages").asInt()
                     Ticket.DaysLeft = daysleft!!
                     when (daysleft) {
                         1 -> Ticket.type = Type.EGY_ALKALMAS

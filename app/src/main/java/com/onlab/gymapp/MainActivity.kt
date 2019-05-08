@@ -19,6 +19,7 @@ import com.onlab.gymapp.Contact.ContactsActivity
 import com.onlab.gymapp.Contact.Gym
 import com.onlab.gymapp.DialogFragments.LogoutDialogFragment
 import com.onlab.gymapp.Login.Login
+import com.onlab.gymapp.Profile.ProfilActivity
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.Profile.profilePictureTask
 import com.onlab.gymapp.Ticket.Ticket

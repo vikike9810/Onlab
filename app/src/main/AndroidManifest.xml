@@ -39,7 +39,7 @@
                 android:label="@string/tickets">
         </activity>
         <activity
-                android:name=".ProfilActivity"
+                android:name=".Profile.ProfilActivity"
                 android:label="@string/profil">
         </activity>
         <activity
