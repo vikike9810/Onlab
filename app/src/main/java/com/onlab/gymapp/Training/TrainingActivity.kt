@@ -24,8 +24,13 @@ class TrainingActivity : AppCompatActivity() {
         var cnt=0
         for( i in List_of_TraningDays) {
             var rowView = layoutInflater.inflate(R.layout.train_layout, null)
-            if((cnt%2)==0){
-                rowView.setBackgroundColor(getResources().getColor(R.color.colorlightblue))
+            when(cnt%7){
+                0 -> rowView.setBackgroundColor(getResources().getColor(R.color.colorlightblue))
+                1 -> rowView.setBackgroundColor(getResources().getColor(R.color._light_green))
+                2 -> rowView.setBackgroundColor(getResources().getColor(R.color.pink))
+                4 -> rowView.setBackgroundColor(getResources().getColor(R.color.peach_puff))
+                5 -> rowView.setBackgroundColor(getResources().getColor(R.color.light_yellow))
+                6 -> rowView.setBackgroundColor(getResources().getColor(R.color.mediumPurple))
             }
             rowView.lay_dur.setText(i.duration_sum.toString())
             rowView.lay_kcal.setText(i.kcal_sum.toString())
@@ -35,13 +40,13 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     fun loadTrainings(){
-        var training1=Training(Training_Type.Kardio,20,200)
-        var training2=Training(Training_Type.Kardio,30,300)
-        var training3=Training(Training_Type.Kardio,10,100)
-        var training4=Training(Training_Type.Kardio,30,300)
-        var training5=Training(Training_Type.Kardio,30,300)
-        var training6=Training(Training_Type.Kardio,30,300)
-        var training7=Training(Training_Type.Kardio,30,300)
+        var training1=Training(null,Training_Type.Kardio.toString(),20,200)
+        var training2=Training(null,Training_Type.Kardio.toString(),30,300)
+        var training3=Training(null,Training_Type.Kardio.toString(),10,100)
+        var training4=Training(null,Training_Type.Kardio.toString(),30,300)
+        var training5=Training(null,Training_Type.Kardio.toString(),30,300)
+        var training6=Training(null,Training_Type.Kardio.toString(),30,300)
+        var training7=Training(null,Training_Type.Kardio.toString(),30,300)
 
         var day1=Training_Day()
         day1.add_Train(training1)

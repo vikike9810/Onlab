@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.onlab.gymapp.Dao.TrainingDatabase
 import com.onlab.gymapp.R
 import kotlinx.android.synthetic.main.today_training.view.*
 
@@ -15,7 +16,6 @@ class TrainingAdapter(val items : ArrayList<Training>, val context: Context)
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.today_training, p0, false))
     }
 
-    // Gets the number of animals in the list
     override fun getItemCount(): Int {
         return items.size
     }
@@ -25,13 +25,36 @@ class TrainingAdapter(val items : ArrayList<Training>, val context: Context)
         notifyItemInserted(items.lastIndex)
     }
 
+    fun addAll(new: List<Training>){
+        items.addAll(new)
+        notifyDataSetChanged()
+    }
+
+    fun deleteItem(position: Int) {
+        val dbThread = Thread {
+            TrainingDatabase.getAppDataBase(context)!!.TrainingDao().deleteItem(
+                items[position])
+            (context as TodayActivity).runOnUiThread{
+                items.removeAt(position)
+                notifyItemRemoved(position)
+            }
+        }
+        dbThread.start()
+    }
+
+    fun updateItem(t: Training) {
+        val idx = items.indexOf(t)
+        items[idx] = t
+        notifyItemChanged(idx)
+    }
+
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         p0.rv_durability?.text = items.get(p1).duration_in_min.toString()
         p0.rv_kcal?.text = items.get(p1).kcal.toString()
         when(items.get(p1).type) {
-            Training_Type.Kardio-> p0.rv_im?.setImageResource(R.drawable.run)
-            Training_Type.Nyujtas-> p0.rv_im?.setImageResource(R.drawable.yoga)
-            Training_Type.Sulyzos_edzes-> p0.rv_im?.setImageResource(R.drawable.body)
+            Training_Type.Kardio.toString()-> p0.rv_im?.setImageResource(R.drawable.run)
+            Training_Type.Nyujtas.toString()-> p0.rv_im?.setImageResource(R.drawable.yoga)
+            Training_Type.Sulyzos_edzes.toString()-> p0.rv_im?.setImageResource(R.drawable.body)
         }
     }
 }

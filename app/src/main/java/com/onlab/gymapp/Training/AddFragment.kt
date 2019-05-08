@@ -45,15 +45,15 @@ class AddFragment : DialogFragment(){
 
         btnSave.setOnClickListener {
             val selectedType = when (fm_training_type.selectedItemPosition) {
-                0 -> Training_Type.Sulyzos_edzes
-                1 -> Training_Type.Kardio
-                2 -> Training_Type.Nyujtas
-                else -> Training_Type.Sulyzos_edzes
+                0 ->Training_Type.Sulyzos_edzes
+                1 ->Training_Type.Kardio
+                2 ->Training_Type.Nyujtas
+                else ->Training_Type.Sulyzos_edzes
             }
             if(!(fm_duration.text.isEmpty()) && !(fm_kcal.text.isEmpty())) {
                 listener.onTrainingCreated(
-                    Training(
-                        selectedType,
+                    Training(null,
+                        selectedType.toString(),
                         fm_duration.text.toString().toInt(),
                         fm_kcal.text.toString().toInt()
                     )

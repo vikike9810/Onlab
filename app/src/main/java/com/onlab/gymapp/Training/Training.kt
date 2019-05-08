@@ -1,13 +1,24 @@
 package com.onlab.gymapp.Training
 
-class Training {
-   var type : Training_Type=Training_Type.Kardio
-    var duration_in_min:Int=0
-    var kcal: Int =0
+import android.arch.persistence.room.*
+import java.io.Serializable
 
-   constructor(t:Training_Type, d:Int, kc:Int){
-       type=t
-       duration_in_min=d
-       kcal=kc
-   }
+enum class Training_Type {
+    Kardio, Sulyzos_edzes, Nyujtas;
 }
+
+@Entity(tableName= "Training")
+data class Training  (
+
+    @PrimaryKey(autoGenerate = true)
+    var itemId: Long?,
+
+   @ColumnInfo(name = "type")
+    var type : String=Training_Type.Kardio.toString(),
+
+    @ColumnInfo(name = "duration")
+    var duration_in_min:Int=0,
+
+   @ColumnInfo(name = "kcal")
+    var kcal: Int =0): Serializable
+
