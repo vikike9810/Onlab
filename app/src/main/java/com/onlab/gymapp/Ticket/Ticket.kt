@@ -13,4 +13,13 @@ object Ticket {
     fun reset() {
         loaded = false
     }
+    fun getString(): String {
+        when(type){
+            Type.NINCS -> return "Nincs jegyed"
+            Type.EGY_ALKALMAS -> return "Egy alkalmas"
+            Type.OT_ALKALMAS -> return "Öt alkalmas"
+            Type.TIZ_ALKALMAS -> return "Tíz alkalmas"
+            Type.HAVI -> return "Egy hónapos bérlet"
+        }
+    }
 }

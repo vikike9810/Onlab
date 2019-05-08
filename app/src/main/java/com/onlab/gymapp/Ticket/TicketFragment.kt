@@ -17,7 +17,7 @@ class TicketFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        fr_type.setText(Ticket.type.toString())
+        fr_type.setText(Ticket.getString())
         if (Ticket.type == Type.HAVI) {
             fr_date.setText(DateConverter.convert(Ticket.Date.year, Ticket.Date.month,Ticket.Date.date))
             fr_num.visibility = View.INVISIBLE
