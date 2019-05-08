@@ -96,8 +96,8 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
                     User.Name = task.result!!["name"]!!
                     val format = SimpleDateFormat("yyyy.MM.dd")
                     User.Birth = format.parse(task.result!!["birth"])
-                    User.Height = Integer.parseInt(task.result!!["height"]) as Integer
-                    User.Weight = Integer.parseInt(task.result!!["weight"]) as Integer
+                    User.Height = Integer.parseInt(task.result!!["height"])
+                    User.Weight = Integer.parseInt(task.result!!["weight"])
                     User.LoggedIn = true
                     completed()
                 }

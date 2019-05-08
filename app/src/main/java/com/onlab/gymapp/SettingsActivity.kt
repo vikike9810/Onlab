@@ -71,8 +71,8 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
 
     fun Save(v: View) {
         User.Name = et_name_settings.text.toString()
-        User.Height = Integer.parseInt(et_height_settings.text.toString()) as Integer
-        User.Weight = Integer.parseInt(et_weight_settings.text.toString()) as Integer
+        User.Height = Integer.parseInt(et_height_settings.text.toString())
+        User.Weight = Integer.parseInt(et_weight_settings.text.toString())
         val format = SimpleDateFormat("yyyy.MM.dd")
         User.Birth = format.parse(et_birth_settings.text.toString())
         saveSettings()
