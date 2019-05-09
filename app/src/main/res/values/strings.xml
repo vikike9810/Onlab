@@ -42,4 +42,5 @@
     <string name="tickets">Jegyek</string>
     <string name="napl_ment_se">Napló mentése</string>
     <string name="napl_friss_t_se">Napló frissítése</string>
+    <string name="rintse_a_k_sz_l_ket_a_termin_lhoz">Érintse a készüléket a terminálhoz!</string>
 </resources>
