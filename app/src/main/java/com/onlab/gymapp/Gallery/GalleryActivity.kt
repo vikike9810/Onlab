@@ -11,10 +11,9 @@ import kotlinx.android.synthetic.main.activity_gallery.*
 import android.widget.ImageView
 import android.widget.AdapterView
 import android.widget.Toast
-import com.bumptech.glide.Glide
+
 import com.google.firebase.storage.FirebaseStorage
 
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 
 class GalleryActivity : AppCompatActivity() {
@@ -51,7 +50,8 @@ class GalleryActivity : AppCompatActivity() {
                     gallery.setSpacing(5)
                     selectedImage = imageView
                     gallery.adapter = galladapter
-                    selectedImage!!.setImageBitmap(galladapter.mImageIds[0])
+                    selectedImage!!.setImageBitmap(galladapter.mImageIds[4])
+                    gallery.setSelection(4)
 
                     gallery.onItemClickListener = object : AdapterView.OnItemClickListener {
                         override fun onItemClick(parent: AdapterView<*>, v: View, position: Int, id: Long) {
@@ -70,7 +70,19 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     fun nextimage(v:View){
+    var num=gallery.selectedItemPosition
+        if( num<10) {
+            selectedImage!!.setImageBitmap(galladapter.mImageIds[num + 1])
+            gallery.setSelection(num + 1)
+        }
+    }
 
+    fun previmage(v:View){
+        var num=gallery.selectedItemPosition
+        if(num>0) {
+            selectedImage!!.setImageBitmap(galladapter.mImageIds[num -1])
+            gallery.setSelection(num -1)
+        }
     }
 
 

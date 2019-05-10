@@ -18,6 +18,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.onlab.gymapp.Contact.ContactsActivity
 import com.onlab.gymapp.Contact.Gym
 import com.onlab.gymapp.DialogFragments.LogoutDialogFragment
+import com.onlab.gymapp.Entry.EntryActivity
 import com.onlab.gymapp.Gallery.GalleryActivity
 import com.onlab.gymapp.Login.Login
 import com.onlab.gymapp.Profile.ProfilActivity
@@ -204,6 +205,11 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
 
     fun Contact(v: View) {
         startActivity(Intent(this, ContactsActivity::class.java))
+    }
+
+    fun Entry(v: View) {
+        if (User.LoggedIn && Ticket.type != Type.NINCS)
+            startActivity(Intent(this, EntryActivity::class.java))
     }
 
     fun Gallery(v:View){

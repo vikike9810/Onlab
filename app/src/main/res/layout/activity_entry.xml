@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/com_facebook_button_background_color_focused_disabled">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#66b2ff"
+            android:orientation="horizontal"
+            android:weightSum="2">
+        <LinearLayout
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:gravity="center">
+            <ImageView
+                    android:id="@+id/img_entry"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+            />
+        </LinearLayout>
+        <LinearLayout
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:orientation="vertical"
+                android:weightSum="2">
+            <TextView
+                    android:id="@+id/tv_entry_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    tools:text="Sándor Viktória"
+                    android:textSize="18sp"
+                    android:layout_marginTop="30dp"
+                    android:textStyle="bold"/>
+            <TextView
+                    android:id="@+id/tv_entry_usages"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    tools:text="Még 5 alkalom"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="30dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/rintse_a_k_sz_l_ket_a_termin_lhoz"
+            android:textColor="#000000"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:textSize="22sp"/>
+
+</LinearLayout>

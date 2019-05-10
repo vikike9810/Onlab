@@ -7,18 +7,10 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import com.onlab.gymapp.R
 import android.widget.Gallery
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.ImageHeaderParser
+
 import com.google.firebase.storage.FirebaseStorage
 import android.graphics.Bitmap
-import com.bumptech.glide.request.target.SimpleTarget
-import android.R.attr.path
-import android.graphics.BitmapFactory
-import android.graphics.drawable.Drawable
-import android.widget.Toast
-import com.bumptech.glide.load.resource.bitmap.BitmapResource
-import com.bumptech.glide.load.resource.bitmap.ResourceBitmapDecoder
-import kotlinx.android.synthetic.main.activity_gallery.*
+
 
 
 class GalleryAdapter : BaseAdapter {
