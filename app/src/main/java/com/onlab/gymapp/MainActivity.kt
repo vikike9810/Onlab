@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.onlab.gymapp.Contact.ContactsActivity
 import com.onlab.gymapp.Contact.Gym
@@ -105,6 +107,7 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
                 }
             }
         }
+        FirebaseMessaging.getInstance().subscribeToTopic(user?.uid)
         var storageRef = storage.reference
         var imageRef = storageRef.child("images/" + user?.uid + ".jpg")
         imageRef.getBytes(1024 * 1024).addOnSuccessListener {
@@ -251,13 +254,16 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
             if (task.isSuccessful) {
                 when (task.result!!["type"]) {
                     "1" -> {
-                        Ticket.type = Type.EGY_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
+                        Ticket.type = Type.EGY_ALKALMAS;
+                        Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
                     }
                     "5" -> {
-                        Ticket.type = Type.OT_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
+                        Ticket.type = Type.OT_ALKALMAS;
+                        Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
                     }
                     "10" -> {
-                        Ticket.type = Type.TIZ_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
+                        Ticket.type = Type.TIZ_ALKALMAS;
+                        Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
                     }
                     "31" -> {
                         Ticket.type = Type.HAVI

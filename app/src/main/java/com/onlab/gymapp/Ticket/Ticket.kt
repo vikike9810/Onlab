@@ -12,6 +12,7 @@ object Ticket {
 
     fun reset() {
         loaded = false
+        type = Type.NINCS
     }
     fun getString(): String {
         when(type){

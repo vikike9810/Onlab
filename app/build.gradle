@@ -80,6 +80,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-functions:17.0.0'
     implementation 'com.google.firebase:firebase-storage:17.0.0'
+    implementation 'com.google.firebase:firebase-messaging:18.0.0'
     implementation 'com.facebook.android:facebook-login:4.41.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'io.jsonwebtoken:jjwt-impl:0.10.5', 'io.jsonwebtoken:jjwt-jackson:0.10.5'
