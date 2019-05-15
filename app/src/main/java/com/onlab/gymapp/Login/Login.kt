@@ -10,7 +10,17 @@ import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.Auth
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInResult
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*;
@@ -23,11 +33,17 @@ import kotlinx.android.synthetic.main.login.*
 import kotlinx.android.synthetic.main.login_fragment.*
 import kotlinx.android.synthetic.main.register_fragment.*
 
-class Login : AppCompatActivity(), LoginFragment.LoginListener {
+class Login : AppCompatActivity(), LoginFragment.LoginListener, GoogleApiClient.OnConnectionFailedListener {
+    override fun onConnectionFailed(p0: ConnectionResult) {
+
+    }
 
     private lateinit var functions: FirebaseFunctions
     private lateinit var auth: FirebaseAuth
     lateinit var user: FirebaseUser
+    private lateinit var mGoogleApiClient: GoogleApiClient
+    private var RC_SIGN_IN = 9001
+    private lateinit var googleSignInButton: SignInButton
     var callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +71,7 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
                     user = auth.currentUser!!
                     MainActivity.user = user
                     val id = user?.uid
+                    User.usID=id
                     Toast.makeText(this, "Sikeres belépés", Toast.LENGTH_LONG).show()
                     User.LoggedIn = false
                     finish()
@@ -123,15 +140,13 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
 
     }
 
-    fun gooUp(v: View) {
-        //    FacebookLoginSetup()
-    }
 
     override fun onLoggedIn() {
        FacebookLoginSetup()
     }
 
-     fun FacebookLoginSetup() {
+
+    fun FacebookLoginSetup() {
 
         buttonFacebookLogin.setReadPermissions("email", "public_profile")
         buttonFacebookLogin.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
@@ -159,8 +174,9 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
                 if (task.isSuccessful) {
                     user = auth.currentUser!!
                     MainActivity.user = user
+                    User.usID=user.uid
                     User.LoggedIn = false
-                    addName(user!!.displayName ?: "nincs név")
+                    addName(user.displayName ?: "nincs név")
                     finish()
 
                 } else {
@@ -168,16 +184,62 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener {
                         baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT
                     ).show()
+                    LoginManager.getInstance().logOut()
+                    finish()
                 }
 
             }
+    }
+
+    private fun googleSignInSetup() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail().build()
+        mGoogleApiClient = GoogleApiClient.Builder(this)
+            .enableAutoManage(this,this)
+            .addApi(Auth.GOOGLE_SIGN_IN_API,gso)
+            .build()
+    }
+
+    override fun onGoogleSignIn(){
+        googleSignInSetup()
+        val signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient)
+        startActivityForResult(signInIntent,RC_SIGN_IN)
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        if (requestCode == RC_SIGN_IN){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account!!)
+            }catch (e: ApiException){
+                Toast.makeText(this,"Google belépés sikertelen",Toast.LENGTH_SHORT).show()
+            }
+        }
+        else{
         callbackManager.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(account: GoogleSignInAccount) {
+        val credential = GoogleAuthProvider.getCredential(account.idToken,null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful){
+                    user = auth.currentUser!!
+                    MainActivity.user = user
+                    User.LoggedIn = false
+                    addName(user.displayName ?: "nincs név")
+                    finish()
+                }
+                else{
+                    Toast.makeText(this,"Google belépés sikertelen",Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
 

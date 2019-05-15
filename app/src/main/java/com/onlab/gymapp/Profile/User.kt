@@ -13,25 +13,26 @@ object User {
 
 
     var Name: String
-    var Height: Integer
-    var Weight: Integer
+    var Height: Int
+    var Weight: Int
     var Birth: Date
     var LoggedIn: Boolean
+    var usID:String="nincs Id"
     lateinit var imgUrl: String
     lateinit var image: Bitmap
 
     init {
         Name = ""
-        Height = Integer(0)
-        Weight = Integer(0)
+        Height = 0
+        Weight = 0
         Birth = Date(0)
         LoggedIn = false
     }
 
     fun resetUser(resources: Resources?) {
         Name = ""
-        Height = Integer(0)
-        Weight = Integer(0)
+        Height = 0
+        Weight = 0
         Birth = Date(0)
         LoggedIn = false
         image = BitmapFactory.decodeResource(resources, R.drawable.no_profile_picture)

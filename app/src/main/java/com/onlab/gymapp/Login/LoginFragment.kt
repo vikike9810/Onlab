@@ -13,24 +13,28 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
+import com.google.android.gms.common.SignInButton
 import com.onlab.gymapp.R
 import kotlinx.android.synthetic.main.login_fragment.*
 import java.io.Serializable
 
 class LoginFragment : Fragment() {
 
-    lateinit var callbackManager : CallbackManager
     lateinit var act : LoginListener
+    lateinit var googleSignInButton: SignInButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        callbackManager = CallbackManager.Factory.create()
 
     }
 
     override fun onCreateView(inflater: LayoutInflater, container:ViewGroup?, savedInstanceState: Bundle?): View?{
 
         val view= inflater.inflate(R.layout.login_fragment,container, false)
+        googleSignInButton = view.findViewById(R.id.btn_google_signin) as SignInButton
+        googleSignInButton.setOnClickListener {
+            act.onGoogleSignIn()
+        }
         return view
 
     }
@@ -48,28 +52,7 @@ class LoginFragment : Fragment() {
 
      interface LoginListener  {
         fun onLoggedIn()
+         fun onGoogleSignIn()
     }
-
-
-
-   /* fun FacebookLoginSetup() {
-        // Initialize Facebook Login button
-
-        buttonFacebookLogin.setReadPermissions("email", "public_profile")
-        buttonFacebookLogin.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
-            override fun onSuccess(loginResult: LoginResult) {
-                EtEmail.setText("Success")
-            }
-
-            override fun onCancel() {
-                EtEmail.setText("Cancel")
-            }
-
-            override fun onError(error: FacebookException) {
-                EtEmail.setText("Error")
-            }
-        })
-    }*/
-
 
 }

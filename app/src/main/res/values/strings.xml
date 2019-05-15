@@ -40,4 +40,13 @@
     <string name="trains">Edzések</string>
     <string name="next_today"><![CDATA[Tovább a mai napra >>>]]></string>
     <string name="tickets">Jegyek</string>
+    <string name="napl_ment_se">Napló mentése</string>
+    <string name="napl_friss_t_se">Napló frissítése</string>
+    <string name="gall_ria">Galéria</string>
+    <string name="rintse_a_k_sz_l_ket_a_termin_lhoz">Érintse a készüléket a terminálhoz!</string>
+    <string name="elhasznaltadazosszeset">Sikeres belépés! Elhasználtad az összes lehetőséget!</string>
+    <string name="sikeresbelepes">Sikeres belépés!</string>
+    <string name="megennyilehetoseg">Sikeres belépés! Még %1$s belépési lehetőséged van</string>
+    <string name="sikertelen">Sikertelen! Nincs több lehetőséged!</string>
+    <string name="rendben">Rendben</string>
 </resources>

@@ -44,7 +44,6 @@
                     android:onClick="Go_Tickets"/>
 
 
-
         </LinearLayout>
 
         <LinearLayout
@@ -72,8 +71,8 @@
                     android:text="@string/bel_p_s"
                     android:layout_margin="1dp"
                     android:textColor="@android:color/white"
-                    android:background="@android:color/holo_blue_dark"/>
-
+                    android:background="@android:color/holo_blue_dark"
+                    android:onClick="Entry"/>
 
 
         </LinearLayout>
@@ -90,10 +89,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:textSize="30dp"
-                    android:text="@string/r_lunk"
+                    android:text="@string/gall_ria"
                     android:layout_margin="1dp"
                     android:textColor="@android:color/white"
                     android:background="@android:color/holo_blue_dark"
+                    android:onClick="Gallery"
             />
             <Button
                     android:layout_width="0dp"
@@ -105,7 +105,6 @@
                     android:textColor="@android:color/white"
                     android:background="@android:color/holo_blue_bright"
                     android:onClick="Contact"/>
-
 
 
         </LinearLayout>

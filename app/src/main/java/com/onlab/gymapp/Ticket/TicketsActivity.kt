@@ -1,5 +1,6 @@
 package com.onlab.gymapp.Ticket
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
+import com.onlab.gymapp.Entry.EntryActivity
 import com.onlab.gymapp.R
 import java.util.*
 
@@ -44,17 +46,17 @@ class TicketsActivity : AppCompatActivity() {
     }
 
     fun buyTicket(v: View) {
-        var tag = v.tag.toString()
+        val tag = v.tag.toString()
         buyTicketsFromServer(tag).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                var ticket = task.result
+                val ticket = task.result
                 val jwt = JWT(ticket!!)
                 if (tag.equals("31")) {
-                    var date = jwt.getClaim("exp").asDate()
+                    val date = jwt.getClaim("exp").asDate()
                     Ticket.Date = date!!
                     Ticket.type = Type.HAVI
                 } else {
-                    var daysleft = jwt.getClaim("usages").asInt()
+                    val daysleft = jwt.getClaim("usages").asInt()
                     Ticket.DaysLeft = daysleft!!
                     when (daysleft) {
                         1 -> Ticket.type = Type.EGY_ALKALMAS
@@ -82,6 +84,10 @@ class TicketsActivity : AppCompatActivity() {
                 val result = task.result!!.data as String
                 result
             }
+    }
+
+    fun goToEntry(v: View){
+        startActivity(Intent(this,EntryActivity::class.java))
     }
 
 

@@ -40,16 +40,16 @@
 
     <com.facebook.login.widget.LoginButton
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:cropToPadding="true"
             android:id="@+id/buttonFacebookLogin"/>
 
-    <ImageButton android:layout_width="match_parent"
-                 android:layout_height="70dp"
-                 android:layout_margin="10dp"
-                 android:src="@drawable/google"
-                 android:onClick="gooUp"/>
+    <com.google.android.gms.common.SignInButton
+            android:id="@+id/btn_google_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
 
     <TextView android:layout_width="wrap_content"
               android:layout_height="wrap_content"

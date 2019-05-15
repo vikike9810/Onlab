@@ -14,11 +14,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.onlab.gymapp.Contact.ContactsActivity
 import com.onlab.gymapp.Contact.Gym
 import com.onlab.gymapp.DialogFragments.LogoutDialogFragment
+import com.onlab.gymapp.Entry.EntryActivity
+import com.onlab.gymapp.Gallery.GalleryActivity
 import com.onlab.gymapp.Login.Login
+import com.onlab.gymapp.Profile.ProfilActivity
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.Profile.profilePictureTask
 import com.onlab.gymapp.Ticket.Ticket
@@ -95,13 +100,14 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
                     User.Name = task.result!!["name"]!!
                     val format = SimpleDateFormat("yyyy.MM.dd")
                     User.Birth = format.parse(task.result!!["birth"])
-                    User.Height = Integer.parseInt(task.result!!["height"]) as Integer
-                    User.Weight = Integer.parseInt(task.result!!["weight"]) as Integer
+                    User.Height = Integer.parseInt(task.result!!["height"])
+                    User.Weight = Integer.parseInt(task.result!!["weight"])
                     User.LoggedIn = true
                     completed()
                 }
             }
         }
+        FirebaseMessaging.getInstance().subscribeToTopic(user?.uid)
         var storageRef = storage.reference
         var imageRef = storageRef.child("images/" + user?.uid + ".jpg")
         imageRef.getBytes(1024 * 1024).addOnSuccessListener {
@@ -204,6 +210,15 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
         startActivity(Intent(this, ContactsActivity::class.java))
     }
 
+    fun Entry(v: View) {
+        if (User.LoggedIn && Ticket.type != Type.NINCS)
+            startActivity(Intent(this, EntryActivity::class.java))
+    }
+
+    fun Gallery(v:View){
+        startActivity(Intent(this,GalleryActivity::class.java))
+    }
+
     private fun getContactDetails() {
         getContactDetailsFromServer().addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -239,13 +254,16 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
             if (task.isSuccessful) {
                 when (task.result!!["type"]) {
                     "1" -> {
-                        Ticket.type = Type.EGY_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
+                        Ticket.type = Type.EGY_ALKALMAS;
+                        Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
                     }
                     "5" -> {
-                        Ticket.type = Type.OT_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
+                        Ticket.type = Type.OT_ALKALMAS;
+                        Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
                     }
                     "10" -> {
-                        Ticket.type = Type.TIZ_ALKALMAS;Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
+                        Ticket.type = Type.TIZ_ALKALMAS;
+                        Ticket.DaysLeft = task.result!!["usages"]!!.toInt()
                     }
                     "31" -> {
                         Ticket.type = Type.HAVI

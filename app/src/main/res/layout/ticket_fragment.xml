@@ -59,7 +59,8 @@
 
     <Button android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Beválátás"
+            android:text="@string/bel_p_s"
+            android:onClick="goToEntry"
             android:layout_gravity="center"/>
 
 </LinearLayout>
