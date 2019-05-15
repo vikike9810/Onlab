@@ -28,8 +28,11 @@ class TicketUsedDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext())
             .setView(getContentView())
-            .setPositiveButton(R.string.ok) { dialog, which ->
-                startActivity(Intent(context,MainActivity::class.java))
+            .setPositiveButton(R.string.rendben) { dialog, which ->
+                val intent = Intent(context,MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
             }
             .create()
     }

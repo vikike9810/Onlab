@@ -74,7 +74,6 @@ class TrainingActivity : AppCompatActivity() {
             Lay_Trains.addView(rowView)
             cnt++
         }
-        Toast.makeText(this,"klj",Toast.LENGTH_LONG).show()
     }
 
     fun loadTrainings(){
