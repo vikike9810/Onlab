@@ -53,15 +53,4 @@
             android:layout_margin="10dp"
             android:onClick="SignUp"/>
 
-    <ImageButton android:layout_width="match_parent"
-                 android:layout_height="70dp"
-                 android:layout_margin="10dp"
-                 android:src="@drawable/face"
-                 android:cropToPadding="true"/>
-
-    <ImageButton android:layout_width="match_parent"
-                 android:layout_height="70dp"
-                 android:layout_margin="10dp"
-                 android:src="@drawable/google"/>
-
 </LinearLayout>

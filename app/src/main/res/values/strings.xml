@@ -52,4 +52,7 @@
     <string name="t_pusa">Típusa</string>
     <string name="m_gsem">Mégsem</string>
     <string name="ment_s">Mentés</string>
+    <string name="a_folytat_shoz_be_kell_jelentkezni">A folytatáshoz be kell jelentkezni!</string>
+    <string name="vegyel_jegyet_most">Nincs érvényes jegyed. Vegyél most!</string>
+    <string name="jegyvasarlas">Jegyvásárlás</string>
 </resources>

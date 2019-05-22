@@ -8,27 +8,26 @@ import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import com.onlab.gymapp.Profile.User
 
 import com.onlab.gymapp.R
 
-class LogoutDialogFragment : DialogFragment() {
+class LoginDialogFragment : DialogFragment() {
 
-    interface LogoutListener{
-        fun logout()
+    interface OnLoginListener{
+        fun Login()
     }
 
-    private lateinit var listener : LogoutListener
-    private lateinit var tvOnLogout: TextView
+    private lateinit var listener : OnLoginListener
+    private lateinit var tvGotoLogin: TextView
     companion object {
-        var TAG: String = "LogoutDialogFragment"
+        var TAG: String = "LoginDialogFragment"
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return AlertDialog.Builder(requireContext())
             .setView(getContentView())
-            .setPositiveButton(R.string.ok) { dialog, which ->
-                listener.logout()
+            .setPositiveButton(R.string.bejelentkez_s) { dialog, which ->
+                listener.Login()
             }
             .setNegativeButton(R.string.cancel,null)
             .create()
@@ -36,13 +35,13 @@ class LogoutDialogFragment : DialogFragment() {
 
     private fun getContentView(): View {
         val contentView = LayoutInflater.from(context).inflate(R.layout.fragment_dialog_template,null)
-        tvOnLogout = contentView.findViewById(R.id.tv_dialog)
-        tvOnLogout.text = getString(R.string.onlogout, User.Name)
+        tvGotoLogin = contentView.findViewById(R.id.tv_dialog)
+        tvGotoLogin.text = getString(R.string.a_folytat_shoz_be_kell_jelentkezni)
         return contentView
     }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        listener = context as LogoutListener
+        listener = context as OnLoginListener
     }
 }

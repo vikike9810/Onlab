@@ -18,6 +18,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.onlab.gymapp.Contact.ContactsActivity
 import com.onlab.gymapp.Contact.Gym
+import com.onlab.gymapp.DialogFragments.BuyTicketDialogFragment
+import com.onlab.gymapp.DialogFragments.LoginDialogFragment
 import com.onlab.gymapp.DialogFragments.LogoutDialogFragment
 import com.onlab.gymapp.Entry.EntryActivity
 import com.onlab.gymapp.Gallery.GalleryActivity
@@ -35,7 +37,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
+class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener, LoginDialogFragment.OnLoginListener, BuyTicketDialogFragment.OnTicketBuyListener {
+
 
     companion object {
         var user: FirebaseUser? = null
@@ -108,8 +111,8 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
             }
         }
         FirebaseMessaging.getInstance().subscribeToTopic(user?.uid)
-        var storageRef = storage.reference
-        var imageRef = storageRef.child("images/" + user?.uid + ".jpg")
+        val storageRef = storage.reference
+        val imageRef = storageRef.child("images/" + user?.uid + ".jpg")
         imageRef.getBytes(1024 * 1024).addOnSuccessListener {
             User.image = BitmapFactory.decodeByteArray(it, 0, it.size)
         }.addOnFailureListener {
@@ -154,7 +157,7 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
                     LogoutDialogFragment().show(supportFragmentManager,LogoutDialogFragment.TAG)
                     return true
                 } else {
-                    startActivity(Intent(this, Login::class.java))
+                    Login()
                     return true
                 }
             }
@@ -164,6 +167,10 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun Login() {
+        startActivity(Intent(this, Login::class.java))
     }
 
     override fun logout() {
@@ -186,6 +193,8 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
     fun Profil(v: View) {
         if (User.LoggedIn)
             startActivity(Intent(this, ProfilActivity::class.java))
+        else
+            showLoginDialogFragment()
     }
 
     fun updateMenuItem() {
@@ -196,14 +205,22 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
         }
     }
 
-    fun Go_Tickets(v: View) {
+    override fun goToTickets() {
+        Go_Tickets(null)
+    }
+
+     fun Go_Tickets(v: View?) {
         if (User.LoggedIn)
             startActivity(Intent(this, TicketsActivity::class.java))
+        else
+            showLoginDialogFragment()
     }
 
     fun Trainings(v:View){
         if (User.LoggedIn)
             startActivity(Intent(this, TrainingActivity::class.java))
+        else
+            showLoginDialogFragment()
     }
 
     fun Contact(v: View) {
@@ -211,12 +228,20 @@ class MainActivity : AppCompatActivity(), LogoutDialogFragment.LogoutListener {
     }
 
     fun Entry(v: View) {
-        if (User.LoggedIn && Ticket.type != Type.NINCS)
+        if (!User.LoggedIn)
+            showLoginDialogFragment()
+        else if (Ticket.type == Type.NINCS)
+            BuyTicketDialogFragment().show(supportFragmentManager,BuyTicketDialogFragment.TAG)
+        else
             startActivity(Intent(this, EntryActivity::class.java))
     }
 
     fun Gallery(v:View){
         startActivity(Intent(this,GalleryActivity::class.java))
+    }
+
+    private fun showLoginDialogFragment(){
+        LoginDialogFragment().show(supportFragmentManager,LoginDialogFragment.TAG)
     }
 
     private fun getContactDetails() {

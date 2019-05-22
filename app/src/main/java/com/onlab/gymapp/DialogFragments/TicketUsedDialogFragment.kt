@@ -38,8 +38,8 @@ class TicketUsedDialogFragment : DialogFragment() {
     }
 
     private fun getContentView(): View {
-        var contentView = LayoutInflater.from(context).inflate(R.layout.fragment_ticket_used_dialog,null)
-        tvTicketUsed = contentView.findViewById(R.id.tv_ticked_used)
+        var contentView = LayoutInflater.from(context).inflate(R.layout.fragment_dialog_template,null)
+        tvTicketUsed = contentView.findViewById(R.id.tv_dialog)
         tvTicketUsed.text = provider.getMessage()
         return contentView
     }

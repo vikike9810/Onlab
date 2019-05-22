@@ -43,7 +43,6 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener, GoogleApiClient.
     lateinit var user: FirebaseUser
     private lateinit var mGoogleApiClient: GoogleApiClient
     private var RC_SIGN_IN = 9001
-    private lateinit var googleSignInButton: SignInButton
     var callbackManager = CallbackManager.Factory.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -129,6 +128,7 @@ class Login : AppCompatActivity(), LoginFragment.LoginListener, GoogleApiClient.
                     // Sign in success, update UI with the signed-in user's information
                     user = auth.currentUser!!
                     addName(RegName.text.toString())
+                    vpLogin.setCurrentItem(0, true)
 
                 } else {
                     // If sign in fails, display a message to the user.
