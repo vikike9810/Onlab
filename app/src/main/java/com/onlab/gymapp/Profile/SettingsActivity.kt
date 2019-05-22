@@ -1,17 +1,12 @@
-package com.onlab.gymapp
+package com.onlab.gymapp.Profile
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.view.View
-import android.widget.DatePicker
 import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
@@ -20,13 +15,11 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
 import com.google.firebase.storage.FirebaseStorage
-import com.onlab.gymapp.Profile.User
 
 import kotlinx.android.synthetic.main.activity_settings.*
 import com.onlab.gymapp.Login.DatePickerDialogFragment
-import com.onlab.gymapp.Profile.profilePictureTask
+import com.onlab.gymapp.R
 import com.onlab.gymapp.Ticket.DateConverter
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 
@@ -148,7 +141,9 @@ class SettingsActivity : AppCompatActivity(), DatePickerDialogFragment.OnDateSel
         var intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"),
+            PICK_IMAGE
+        )
 
     }
 

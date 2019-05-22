@@ -15,7 +15,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_column="1"
-                    android:text="Típusa"
+                    android:text="@string/t_pusa"
                     android:textSize="15sp"/>
 
             <Spinner
@@ -29,7 +29,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_column="1"
-                    android:text="Időtartama"
+                    android:text="@string/id_tartama_percben"
                     android:textSize="15sp"/>
 
             <EditText
@@ -45,7 +45,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_column="1"
-                    android:text="Elégetett Kalória"
+                    android:text="@string/el_getett_kal_ria"
                     android:textSize="15sp"/>
 
             <EditText
@@ -63,14 +63,14 @@
                     android:layout_width="wrap_content"
                     android:layout_column="1"
                     android:gravity="center"
-                    android:text="Mégsem"
+                    android:text="@string/m_gsem"
                     android:textSize="15sp"/>
 
             <Button
                     android:id="@+id/btnSave"
                     android:layout_width="wrap_content"
                     android:gravity="center"
-                    android:text="Mentés"
+                    android:text="@string/ment_s"
                     android:textSize="15sp"/>
 
         </TableRow>

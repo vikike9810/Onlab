@@ -26,8 +26,6 @@
     <string name="beallitasok">Beállítások</string>
     <string name="title_activity_settings">Settings</string>
     <string name="profil_szerkeszt_se">Profil szerkesztése</string>
-    <string name="m_gsem">Mégsem</string>
-    <string name="ment_s">Mentés</string>
     <string name="logout">Kijelentkezés</string>
     <string name="title_activity_tikets">Tikets</string>
     <string name="title_activity_contacts">Kapcsolat</string>
@@ -49,4 +47,9 @@
     <string name="megennyilehetoseg">Sikeres belépés! Még %1$s belépési lehetőséged van</string>
     <string name="sikertelen">Sikertelen! Nincs több lehetőséged!</string>
     <string name="rendben">Rendben</string>
+    <string name="id_tartama_percben">Időtartama percben</string>
+    <string name="el_getett_kal_ria">Elégetett Kalória</string>
+    <string name="t_pusa">Típusa</string>
+    <string name="m_gsem">Mégsem</string>
+    <string name="ment_s">Mentés</string>
 </resources>

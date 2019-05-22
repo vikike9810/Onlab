@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.onlab.gymapp.R
-import com.onlab.gymapp.SettingsActivity
 import com.onlab.gymapp.Ticket.Ticket
 import com.onlab.gymapp.Ticket.TicketsActivity
 import com.onlab.gymapp.Ticket.Type

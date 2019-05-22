@@ -7,20 +7,13 @@ import android.view.Menu
 import android.view.MenuItem
 
 import android.view.View
-import android.widget.Toast
 import com.onlab.gymapp.Dao.DayDatabase
 import com.onlab.gymapp.Dao.TrainingDatabase
-import com.onlab.gymapp.DialogFragments.LogoutDialogFragment
-import com.onlab.gymapp.Login.Login
-import com.onlab.gymapp.MainActivity
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.R
-import com.onlab.gymapp.SettingsActivity
 import com.onlab.gymapp.Storage.DBStorage
 import kotlinx.android.synthetic.main.activity_training.*
 import kotlinx.android.synthetic.main.train_layout.view.*
-import java.io.File
-import kotlinx.android.synthetic.main.activity_training.view.*
 
 
 class TrainingActivity : AppCompatActivity() {

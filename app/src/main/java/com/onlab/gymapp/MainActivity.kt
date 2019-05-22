@@ -14,7 +14,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.FirebaseFunctionsException
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import com.onlab.gymapp.Contact.ContactsActivity
@@ -24,6 +23,7 @@ import com.onlab.gymapp.Entry.EntryActivity
 import com.onlab.gymapp.Gallery.GalleryActivity
 import com.onlab.gymapp.Login.Login
 import com.onlab.gymapp.Profile.ProfilActivity
+import com.onlab.gymapp.Profile.SettingsActivity
 import com.onlab.gymapp.Profile.User
 import com.onlab.gymapp.Profile.profilePictureTask
 import com.onlab.gymapp.Ticket.Ticket
