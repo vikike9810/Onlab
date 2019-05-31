@@ -4,12 +4,22 @@ Legfőbb funkciója a jegyvásárlás, illetve ez alapján beléptetés egy bel�
 Az alkalmazás a következő funkciókat valósítja meg:
 
 •	Account létrehozása
-•	Bejelentkezés
+
+•	Bejelentkezés (email-jelszó, facebook, google)
+
 •	Személyes adatok megadása, szerkesztése
+
 •	Felhasználói adatok tárolása szerveren (Firebase)
+
 •	Jegyvásárlás
+
 •	Beléptetés Nfc-vel
+
 •	Napi edzések tárolása
+
 •	Edzések naplózása (szerverre mentése, letöltése)
+
 •	Galéria a konditeremről
+
 •	Konditerem elérhetőségei 
+
